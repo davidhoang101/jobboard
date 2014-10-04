@@ -18,17 +18,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>32,'maxlength'=>32)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'var_name'); ?>
-		<?php echo $form->textField($model,'var_name',array('size'=>32,'maxlength'=>32)); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'title'); ?>
-		<?php echo $form->textArea($model,'title',array('rows'=>6, 'cols'=>50)); ?>
+		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>200)); ?>
 	</div>
 
 	<div class="row">

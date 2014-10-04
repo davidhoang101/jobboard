@@ -51,13 +51,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'web_url'); ?>
-		<?php echo $form->textField($model,'web_url',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->textField($model,'web_url',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'web_url'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'logo_url'); ?>
-		<?php echo $form->textField($model,'logo_url',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->textField($model,'logo_url',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'logo_url'); ?>
 	</div>
 

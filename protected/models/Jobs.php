@@ -10,10 +10,12 @@
  * @property integer $company_id
  * @property string $title
  * @property string $contact_way
- * @property string $summary
  * @property string $description
  * @property string $job_require
- * @property string $apply
+ * @property string $contact_des
+ * @property string $contact_dep
+ * @property string $contact_add
+ * @property string $cv_lang
  * @property string $created_on
  * @property integer $is_temp
  * @property integer $is_active
@@ -40,12 +42,11 @@ class Jobs extends CActiveRecord
 			array('is_temp, is_active, views_count', 'required'),
 			array('type_id, category_id, company_id, is_temp, is_active, views_count', 'numerical', 'integerOnly'=>true),
 			array('title, contact_way', 'length', 'max'=>100),
-			array('summary', 'length', 'max'=>255),
-			array('apply', 'length', 'max'=>200),
+			array('contact_des, contact_dep, contact_add, cv_lang', 'length', 'max'=>200),
 			array('description, job_require, created_on', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type_id, category_id, company_id, title, contact_way, summary, description, job_require, apply, created_on, is_temp, is_active, views_count', 'safe', 'on'=>'search'),
+			array('id, type_id, category_id, company_id, title, contact_way, description, job_require, contact_des, contact_dep, contact_add, cv_lang, created_on, is_temp, is_active, views_count', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,10 +73,12 @@ class Jobs extends CActiveRecord
 			'company_id' => 'Company',
 			'title' => 'Title',
 			'contact_way' => 'Contact Way',
-			'summary' => 'Summary',
 			'description' => 'Description',
 			'job_require' => 'Job Require',
-			'apply' => 'Apply',
+			'contact_des' => 'Contact Des',
+			'contact_dep' => 'Contact Dep',
+			'contact_add' => 'Contact Add',
+			'cv_lang' => 'Cv Lang',
 			'created_on' => 'Created On',
 			'is_temp' => 'Is Temp',
 			'is_active' => 'Is Active',
@@ -107,10 +110,12 @@ class Jobs extends CActiveRecord
 		$criteria->compare('company_id',$this->company_id);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('contact_way',$this->contact_way,true);
-		$criteria->compare('summary',$this->summary,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('job_require',$this->job_require,true);
-		$criteria->compare('apply',$this->apply,true);
+		$criteria->compare('contact_des',$this->contact_des,true);
+		$criteria->compare('contact_dep',$this->contact_dep,true);
+		$criteria->compare('contact_add',$this->contact_add,true);
+		$criteria->compare('cv_lang',$this->cv_lang,true);
 		$criteria->compare('created_on',$this->created_on,true);
 		$criteria->compare('is_temp',$this->is_temp);
 		$criteria->compare('is_active',$this->is_active);

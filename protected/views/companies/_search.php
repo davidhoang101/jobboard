@@ -38,12 +38,12 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'web_url'); ?>
-		<?php echo $form->textField($model,'web_url',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->textField($model,'web_url',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->label($model,'logo_url'); ?>
-		<?php echo $form->textField($model,'logo_url',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->textField($model,'logo_url',array('size'=>60,'maxlength'=>255)); ?>
 	</div>
 
 	<div class="row">

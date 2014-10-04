@@ -6,8 +6,6 @@
  * The followings are the available columns in table 'categories':
  * @property integer $id
  * @property string $name
- * @property string $var_name
- * @property string $title
  * @property string $description
  * @property string $keywords
  * @property integer $category_order
@@ -30,12 +28,12 @@ class Categories extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, var_name, title, description, keywords, category_order', 'required'),
 			array('category_order', 'numerical', 'integerOnly'=>true),
-			array('name, var_name', 'length', 'max'=>32),
+			array('name', 'length', 'max'=>200),
+			array('description, keywords', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, var_name, title, description, keywords, category_order', 'safe', 'on'=>'search'),
+			array('id, name, description, keywords, category_order', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,8 +56,6 @@ class Categories extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'name' => 'Name',
-			'var_name' => 'Var Name',
-			'title' => 'Title',
 			'description' => 'Description',
 			'keywords' => 'Keywords',
 			'category_order' => 'Category Order',
@@ -86,8 +82,6 @@ class Categories extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('var_name',$this->var_name,true);
-		$criteria->compare('title',$this->title,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('keywords',$this->keywords,true);
 		$criteria->compare('category_order',$this->category_order);
