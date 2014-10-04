@@ -38,8 +38,8 @@ class Companies extends CActiveRecord
 		return array(
 			array('members, city_id', 'numerical', 'integerOnly'=>true),
 			array('name, email', 'length', 'max'=>100),
-			array('password, web_url, logo_url', 'length', 'max'=>32),
-			array('address', 'length', 'max'=>255),
+			array('password', 'length', 'max'=>32),
+			array('web_url, logo_url, address', 'length', 'max'=>255),
 			array('phone, fax', 'length', 'max'=>50),
 			array('description, created_on', 'safe'),
 			// The following rule is used by search().

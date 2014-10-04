@@ -29,21 +29,29 @@
 	<?php echo CHtml::encode($data->contact_way); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('summary')); ?>:</b>
-	<?php echo CHtml::encode($data->summary); ?>
-	<br />
-
-	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 	<?php echo CHtml::encode($data->description); ?>
 	<br />
 
+	<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('job_require')); ?>:</b>
 	<?php echo CHtml::encode($data->job_require); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('apply')); ?>:</b>
-	<?php echo CHtml::encode($data->apply); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('contact_des')); ?>:</b>
+	<?php echo CHtml::encode($data->contact_des); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('contact_dep')); ?>:</b>
+	<?php echo CHtml::encode($data->contact_dep); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('contact_add')); ?>:</b>
+	<?php echo CHtml::encode($data->contact_add); ?>
+	<br />
+
+	<b><?php echo CHtml::encode($data->getAttributeLabel('cv_lang')); ?>:</b>
+	<?php echo CHtml::encode($data->cv_lang); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('created_on')); ?>:</b>

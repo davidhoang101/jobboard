@@ -50,12 +50,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'summary'); ?>
-		<?php echo $form->textField($model,'summary',array('size'=>60,'maxlength'=>255)); ?>
-		<?php echo $form->error($model,'summary'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
 		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'description'); ?>
@@ -68,9 +62,27 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'apply'); ?>
-		<?php echo $form->textField($model,'apply',array('size'=>60,'maxlength'=>200)); ?>
-		<?php echo $form->error($model,'apply'); ?>
+		<?php echo $form->labelEx($model,'contact_des'); ?>
+		<?php echo $form->textField($model,'contact_des',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->error($model,'contact_des'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'contact_dep'); ?>
+		<?php echo $form->textField($model,'contact_dep',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->error($model,'contact_dep'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'contact_add'); ?>
+		<?php echo $form->textField($model,'contact_add',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->error($model,'contact_add'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'cv_lang'); ?>
+		<?php echo $form->textField($model,'cv_lang',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->error($model,'cv_lang'); ?>
 	</div>
 
 	<div class="row">

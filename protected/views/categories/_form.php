@@ -21,20 +21,8 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->textField($model,'name',array('size'=>60,'maxlength'=>200)); ?>
 		<?php echo $form->error($model,'name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'var_name'); ?>
-		<?php echo $form->textField($model,'var_name',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'var_name'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textArea($model,'title',array('rows'=>6, 'cols'=>50)); ?>
-		<?php echo $form->error($model,'title'); ?>
 	</div>
 
 	<div class="row">

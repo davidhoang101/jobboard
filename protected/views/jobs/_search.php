@@ -42,11 +42,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'summary'); ?>
-		<?php echo $form->textField($model,'summary',array('size'=>60,'maxlength'=>255)); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'description'); ?>
 		<?php echo $form->textArea($model,'description',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
@@ -57,8 +52,23 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'apply'); ?>
-		<?php echo $form->textField($model,'apply',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->label($model,'contact_des'); ?>
+		<?php echo $form->textField($model,'contact_des',array('size'=>60,'maxlength'=>200)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'contact_dep'); ?>
+		<?php echo $form->textField($model,'contact_dep',array('size'=>60,'maxlength'=>200)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'contact_add'); ?>
+		<?php echo $form->textField($model,'contact_add',array('size'=>60,'maxlength'=>200)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'cv_lang'); ?>
+		<?php echo $form->textField($model,'cv_lang',array('size'=>60,'maxlength'=>200)); ?>
 	</div>
 
 	<div class="row">
