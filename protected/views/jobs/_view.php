@@ -70,6 +70,10 @@
 	<?php echo CHtml::encode($data->views_count); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('career_link_id')); ?>:</b>
+	<?php echo CHtml::encode($data->career_link_id); ?>
+	<br />
+
 	*/ ?>
 
 </div>

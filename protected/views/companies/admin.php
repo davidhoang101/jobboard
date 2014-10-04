@@ -57,8 +57,9 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'address',
 		'city_id',
 		'phone',
-		'fax',
 		'created_on',
+		'fax',
+		'careerlink_id',
 		*/
 		array(
 			'class'=>'CButtonColumn',

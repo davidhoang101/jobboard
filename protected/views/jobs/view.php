@@ -37,5 +37,6 @@ $this->menu=array(
 		'is_temp',
 		'is_active',
 		'views_count',
+		'career_link_id',
 	),
 )); ?>

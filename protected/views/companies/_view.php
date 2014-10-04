@@ -50,12 +50,16 @@
 	<?php echo CHtml::encode($data->phone); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('created_on')); ?>:</b>
+	<?php echo CHtml::encode($data->created_on); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fax')); ?>:</b>
 	<?php echo CHtml::encode($data->fax); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('created_on')); ?>:</b>
-	<?php echo CHtml::encode($data->created_on); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('careerlink_id')); ?>:</b>
+	<?php echo CHtml::encode($data->careerlink_id); ?>
 	<br />
 
 	*/ ?>

@@ -32,7 +32,8 @@ $this->menu=array(
 		'address',
 		'city_id',
 		'phone',
-		'fax',
 		'created_on',
+		'fax',
+		'careerlink_id',
 	),
 )); ?>
