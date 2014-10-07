@@ -9,14 +9,15 @@
  * @property string $email
  * @property string $password
  * @property string $description
- * @property integer $members
+ * @property string $members
  * @property string $web_url
  * @property string $logo_url
  * @property string $address
  * @property integer $city_id
  * @property string $phone
- * @property string $fax
  * @property string $created_on
+ * @property string $fax
+ * @property integer $careerlink_id
  */
 class Companies extends CActiveRecord
 {
@@ -36,15 +37,15 @@ class Companies extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('members, city_id', 'numerical', 'integerOnly'=>true),
+			array('city_id, careerlink_id', 'numerical', 'integerOnly'=>true),
 			array('name, email', 'length', 'max'=>100),
 			array('password', 'length', 'max'=>32),
+			array('members, phone, fax', 'length', 'max'=>50),
 			array('web_url, logo_url, address', 'length', 'max'=>255),
-			array('phone, fax', 'length', 'max'=>50),
 			array('description, created_on', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, email, password, description, members, web_url, logo_url, address, city_id, phone, fax, created_on', 'safe', 'on'=>'search'),
+			array('id, name, email, password, description, members, web_url, logo_url, address, city_id, phone, created_on, fax, careerlink_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -76,8 +77,9 @@ class Companies extends CActiveRecord
 			'address' => 'Address',
 			'city_id' => 'City',
 			'phone' => 'Phone',
-			'fax' => 'Fax',
 			'created_on' => 'Created On',
+			'fax' => 'Fax',
+			'careerlink_id' => 'Careerlink',
 		);
 	}
 
@@ -104,14 +106,15 @@ class Companies extends CActiveRecord
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('description',$this->description,true);
-		$criteria->compare('members',$this->members);
+		$criteria->compare('members',$this->members,true);
 		$criteria->compare('web_url',$this->web_url,true);
 		$criteria->compare('logo_url',$this->logo_url,true);
 		$criteria->compare('address',$this->address,true);
 		$criteria->compare('city_id',$this->city_id);
 		$criteria->compare('phone',$this->phone,true);
-		$criteria->compare('fax',$this->fax,true);
 		$criteria->compare('created_on',$this->created_on,true);
+		$criteria->compare('fax',$this->fax,true);
+		$criteria->compare('careerlink_id',$this->careerlink_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

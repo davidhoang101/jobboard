@@ -39,13 +39,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'title'); ?>
-		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'title',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'title'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'contact_way'); ?>
-		<?php echo $form->textField($model,'contact_way',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->textField($model,'contact_way',array('size'=>60,'maxlength'=>255)); ?>
 		<?php echo $form->error($model,'contact_way'); ?>
 	</div>
 
@@ -63,19 +63,19 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'contact_des'); ?>
-		<?php echo $form->textField($model,'contact_des',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->textArea($model,'contact_des',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'contact_des'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'contact_dep'); ?>
-		<?php echo $form->textField($model,'contact_dep',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->textArea($model,'contact_dep',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'contact_dep'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'contact_add'); ?>
-		<?php echo $form->textField($model,'contact_add',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->textArea($model,'contact_add',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'contact_add'); ?>
 	</div>
 
@@ -107,6 +107,12 @@
 		<?php echo $form->labelEx($model,'views_count'); ?>
 		<?php echo $form->textField($model,'views_count'); ?>
 		<?php echo $form->error($model,'views_count'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'career_link_id'); ?>
+		<?php echo $form->textField($model,'career_link_id'); ?>
+		<?php echo $form->error($model,'career_link_id'); ?>
 	</div>
 
 	<div class="row buttons">

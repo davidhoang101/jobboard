@@ -45,7 +45,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'members'); ?>
-		<?php echo $form->textField($model,'members'); ?>
+		<?php echo $form->textField($model,'members',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'members'); ?>
 	</div>
 
@@ -80,15 +80,21 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'created_on'); ?>
+		<?php echo $form->textField($model,'created_on'); ?>
+		<?php echo $form->error($model,'created_on'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'fax'); ?>
 		<?php echo $form->textField($model,'fax',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'fax'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'created_on'); ?>
-		<?php echo $form->textField($model,'created_on'); ?>
-		<?php echo $form->error($model,'created_on'); ?>
+		<?php echo $form->labelEx($model,'careerlink_id'); ?>
+		<?php echo $form->textField($model,'careerlink_id'); ?>
+		<?php echo $form->error($model,'careerlink_id'); ?>
 	</div>
 
 	<div class="row buttons">

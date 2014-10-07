@@ -62,6 +62,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'is_temp',
 		'is_active',
 		'views_count',
+		'career_link_id',
 		*/
 		array(
 			'class'=>'CButtonColumn',

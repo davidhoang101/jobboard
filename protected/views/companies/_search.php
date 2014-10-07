@@ -33,7 +33,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'members'); ?>
-		<?php echo $form->textField($model,'members'); ?>
+		<?php echo $form->textField($model,'members',array('size'=>50,'maxlength'=>50)); ?>
 	</div>
 
 	<div class="row">
@@ -62,13 +62,18 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'created_on'); ?>
+		<?php echo $form->textField($model,'created_on'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'fax'); ?>
 		<?php echo $form->textField($model,'fax',array('size'=>50,'maxlength'=>50)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'created_on'); ?>
-		<?php echo $form->textField($model,'created_on'); ?>
+		<?php echo $form->label($model,'careerlink_id'); ?>
+		<?php echo $form->textField($model,'careerlink_id'); ?>
 	</div>
 
 	<div class="row buttons">

@@ -20,6 +20,7 @@
  * @property integer $is_temp
  * @property integer $is_active
  * @property integer $views_count
+ * @property integer $career_link_id
  */
 class Jobs extends CActiveRecord
 {
@@ -39,14 +40,13 @@ class Jobs extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('is_temp, is_active, views_count', 'required'),
-			array('type_id, category_id, company_id, is_temp, is_active, views_count', 'numerical', 'integerOnly'=>true),
-			array('title, contact_way', 'length', 'max'=>100),
-			array('contact_des, contact_dep, contact_add, cv_lang', 'length', 'max'=>200),
-			array('description, job_require, created_on', 'safe'),
+			array('type_id, category_id, company_id, is_temp, is_active, views_count, career_link_id', 'numerical', 'integerOnly'=>true),
+			array('title, contact_way', 'length', 'max'=>255),
+			array('cv_lang', 'length', 'max'=>200),
+			array('description, job_require, contact_des, contact_dep, contact_add, created_on', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type_id, category_id, company_id, title, contact_way, description, job_require, contact_des, contact_dep, contact_add, cv_lang, created_on, is_temp, is_active, views_count', 'safe', 'on'=>'search'),
+			array('id, type_id, category_id, company_id, title, contact_way, description, job_require, contact_des, contact_dep, contact_add, cv_lang, created_on, is_temp, is_active, views_count, career_link_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -83,6 +83,7 @@ class Jobs extends CActiveRecord
 			'is_temp' => 'Is Temp',
 			'is_active' => 'Is Active',
 			'views_count' => 'Views Count',
+			'career_link_id' => 'Career Link',
 		);
 	}
 
@@ -120,6 +121,7 @@ class Jobs extends CActiveRecord
 		$criteria->compare('is_temp',$this->is_temp);
 		$criteria->compare('is_active',$this->is_active);
 		$criteria->compare('views_count',$this->views_count);
+		$criteria->compare('career_link_id',$this->career_link_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

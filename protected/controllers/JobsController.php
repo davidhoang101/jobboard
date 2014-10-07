@@ -16,7 +16,7 @@ class JobsController extends Controller
 		return array(
 			'accessControl', // perform access control for CRUD operations
 			'postOnly + delete', // we only allow deletion via POST request
-		);
+			);
 	}
 
 	/**
@@ -30,19 +30,19 @@ class JobsController extends Controller
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
 				'users'=>array('*'),
-			),
+				),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update','pullData'),
 				'users'=>array('@'),
-			),
+				),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete','pullData'),
 				'users'=>array('admin'),
-			),
+				),
 			array('deny',  // deny all users
 				'users'=>array('*'),
-			),
-		);
+				),
+			);
 	}
 
 	/**
@@ -53,7 +53,7 @@ class JobsController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-		));
+			));
 	}
 
 	/**
@@ -76,7 +76,7 @@ class JobsController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**
@@ -100,7 +100,7 @@ class JobsController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**
@@ -125,7 +125,7 @@ class JobsController extends Controller
 		$dataProvider=new CActiveDataProvider('Jobs');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-		));
+			));
 	}
 
 	/**
@@ -140,7 +140,7 @@ class JobsController extends Controller
 
 		$this->render('admin',array(
 			'model'=>$model,
-		));
+			));
 	}
 
 	/**
@@ -169,5 +169,103 @@ class JobsController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+
+	public function actionPullData(){	
+
+		$cates = Categories::model()->findAll(array('select'=>'id,name'));
+		
+		$records = '';
+		$jobs = array();
+
+		//fetch data
+		if(!empty($_POST['yt0'])) {	
+			$catId = $_POST['cate_id'];				
+			$jobs = $this->fetchData($_POST['cate_link'], $_POST['cate_pattern'],
+				array($_POST['cate_from_page'], $_POST['cate_to_page']), $_POST['nums']);			
+			$records = count($jobs);	
+
+			foreach($jobs as $item)
+			{
+				$modelCom = Companies::model()->find('careerlink_id=' . $item['comId']);
+				$comId = 0;
+				if (empty($modelCom)) {
+					//insert company
+					$com = new Companies;
+					$com->name = isset($item['comName']) ? $item['comName'] : '';
+					$com->email = isset($item['contactDepartment']) ? $item['contactDepartment'] : '';
+					$com->description = isset($item['comDes']) ? $item['comDes'] : '';
+					$com->members = isset($item['comNumStaff']) ? $item['comNumStaff'] : '';
+					$com->web_url = isset($item['comWeb']) ? $item['comWeb'] : '';
+					$com->address = isset($item['contactAdd']) ? $item['contactAdd'] : '';
+					$com->careerlink_id = isset($item['comId']) ? $item['comId'] : '';
+					$com->save();
+					$comId = $com->id;
+				} else {
+					$comId = $modelCom->id;
+				}				
+				
+				//print_r($com->attributes);die;
+				if(!empty($comId)){					
+					$modelJob = Jobs::model()->find('career_link_id=' . $item['jobId']);
+					//insert job			
+					if (empty($modelJob)) {
+						$model = new Jobs;
+						$model->category_id = $catId ? $catId : 0;
+						$model->company_id = isset($com->id) ? $com->id : 0;
+						$model->title = isset($item['jobTitle']) ? $item['jobTitle'] : 0;
+						$model->contact_way = isset($item['contactWay']) ? $item['contactWay'] : 0;
+						$model->job_require = isset($item['jobSkills']) ? $item['jobSkills'] : 0;
+						$model->contact_des = isset($item['contactDes']) ? $item['contactDes'] : 0;
+						$model->contact_dep = isset($item['contactDepartment']) ? $item['contactDepartment'] : 0;
+						$model->contact_add = isset($item['contactAdd']) ? $item['contactAdd'] : 0;
+						$model->cv_lang = isset($item['cvLang']) ? $item['cvLang'] : 0;	
+						$model->career_link_id = isset($item['jobId']) ? $item['jobId'] : 0;	
+						if($model->save()){
+							echo "saved";
+						} else {
+							print_r($model->getErrors());
+						}
+					}					
+					
+
+				} else {
+					print_r($com->getErrors());
+				}
+			}
+			unset($jobs);		
+		}			
+
+		$this->render('pullData',array('records_found' => $records,'cates' => $cates));
+	}
+
+	public function fetchData($cateLink = 'http://www.careerlink.vn/viec-lam/cntt-phan-mem19',
+		$catePattern = '/viec-lam/cntt-phan-mem/19?page=',$offsetLimit = array(1,1), $limit = 1){
+		
+		$html = new simple_html_dom();        
+        //get all pages of category
+		$crawler = new MyCrawler($cateLink,$catePattern);
+		$allPages = $crawler->getAllPages($offsetLimit);		
+
+        //get  all link of this category
+		$allLinks = array();  
+		foreach ($allPages as $key => $value) {
+			$crawler->getAllLinkOfOnePage($value, $allLinks);
+		}
+
+		$rsData = array();
+		$iter = 1;
+		foreach ($allLinks as $key => $value) {        
+			if($iter > $limit && $limit != 0){
+				break;
+			} else {
+				$rsData[] = $crawler->getDetailPost($value);                              
+			}
+
+			$iter++;
+		}  
+		
+		
+		return $rsData ;                     
 	}
 }
