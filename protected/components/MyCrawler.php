@@ -18,54 +18,61 @@ class MyCrawler {
 		$html->load_file($postUrl);
 
 		$comInfos = array();
-		foreach ($html->find('div[class=ntd-chitietvieclam] table td') as $companyInfo) {
-			$comInfos[] = $companyInfo->plaintext;       
+		$temp = array();
+		foreach ($html->find('div[class=ntd-chitietvieclam] table td') as $companyInfo) {			
+			 $comInfos[]= $companyInfo->plaintext;       
 		} 
-
+		$results['comName'] = $comInfos[1]; 
+		$results['comNumStaff'] = $comInfos[5]; 
+		$results['comWeb'] = $comInfos[3]; 
+		unset($comInfos);
 		foreach ($html->find('div[id=firmDescrip]') as $comDes) {
 			$comInfos[] = $comDes->plaintext;       
 		}   
+		$results['comDes'] = html_entity_decode($comInfos[0]); unset($comInfos);	
 
 		foreach ($html->find('div[class=mceContentBody]') as $jobDes) {
 			$comInfos[] = $jobDes->plaintext;       
 		} 
+		$results['jobDes'] = html_entity_decode($comInfos[0]); 
+		$results['jobSkills'] = html_entity_decode($comInfos[1]); 
+		unset($comInfos);
 
 		foreach ($html->find('li[class=clearfix] span') as $contact) {
 			$comInfos[] = $contact->plaintext;       
 		} 
-
+		$results['contactWay'] = html_entity_decode($comInfos[1]); 
+		$results['contactDes'] = html_entity_decode($comInfos[3]); 		
+		$results['contactDepartment'] = html_entity_decode($comInfos[6] . $comInfos[7]); 
+		$results['contactAdd'] = html_entity_decode(end($comInfos)); 
+		unset($comInfos);
+		
 		foreach ($html->find('span[class=confi_text]') as $langCv) {
 			$comInfos[] = $langCv->plaintext;       
 		}   
-
+		$results['cvLang'] = $comInfos[0]; 
+		unset($comInfos);
 		foreach ($html->find('div[class=container] h1') as $jobTitle) {
 			$comInfos[] = $jobTitle->plaintext;       
 		}
+		$results['jobTitle'] = $comInfos[0]; 
+		unset($comInfos);
 		
 		foreach ($html->find('a[class=lk-company]') as $com) {
-			$comInfos[] = end(explode('/', $com->href));       
+			//print_r($com->href);die;
+			//$comInfos[] = end(explode('/', $com->href));       
+			$comInfos[] = $com->href;       
 		}
+		$results['comId'] = $comInfos[0]; 
+		unset($comInfos);
+
 		foreach ($html->find('a[class=nop]') as $jjoob) {
 			$ar = explode('/', $jjoob->href);
 			$comInfos[] = $ar[3];       
 		}	
-		
-		$results['comName'] = isset($comInfos[1]) ? $comInfos[1] : '';
-		$results['comWeb'] = isset($comInfos[3]) ? $comInfos[3] : '';
-		$results['comNumStaff'] = isset($comInfos[5]) ? $comInfos[5] : '';
-		$results['comContact'] = isset($comInfos[7]) ? $comInfos[7] : '';
-		$results['comDes'] = isset($comInfos[8]) ? html_entity_decode($comInfos[8]) : '';
-		$results['jobDes'] = isset($comInfos[9]) ? html_entity_decode($comInfos[9]) : '';
-		$results['jobSkills'] = isset($comInfos[10]) ? html_entity_decode($comInfos[10]) : '';
-		$results['contactWay'] = isset($comInfos[12]) ? $comInfos[12] : '';
-		$results['contactDes'] = isset($comInfos[14]) ? html_entity_decode($comInfos[14]) : '';
-		$results['contactDepartment'] = isset($comInfos[16]) ? html_entity_decode($comInfos[16]) : '';
-		$results['contactAdd'] = isset($comInfos[18]) ? html_entity_decode($comInfos[18]) : '';
-		$results['cvLang'] = isset($comInfos[21]) ? $comInfos[21] : '';
-		$results['jobTitle'] = isset($comInfos[22]) ? $comInfos[22] : '';
-		$results['comId'] = isset($comInfos[23]) ? $comInfos[23] : '';
-		$results['jobId'] = isset($comInfos[24]) ? $comInfos[24] : '';
-		
+		$results['jobId'] = $comInfos[0]; 
+		unset($comInfos);
+				// /return $comInfos;
 		return array_map('trim',$results);   
 	}
 	
@@ -85,7 +92,7 @@ class MyCrawler {
     	//loop and get all page's link
 		for ($i = $offsetLimit[0]; $i <= $offsetLimit[1]; $i++) { 
 			$pages[] = $this->baseUrl . $this->categoryLinkPattern . $i;
-		}
+		}		
 
 		return $pages;
 	}

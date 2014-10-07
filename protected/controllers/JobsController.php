@@ -184,11 +184,11 @@ class JobsController extends Controller
 			$jobs = $this->fetchData($_POST['cate_link'], $_POST['cate_pattern'],
 				array($_POST['cate_from_page'], $_POST['cate_to_page']), $_POST['nums']);			
 			$records = count($jobs);	
-
+			
 			foreach($jobs as $item)
 			{
-				$modelCom = Companies::model()->find('careerlink_id=' . $item['comId']);
-				$comId = 0;
+				$comId = end(explode('/', $item['comId']));
+				$modelCom = Companies::model()->find('careerlink_id=' . $comId);			
 				if (empty($modelCom)) {
 					//insert company
 					$com = new Companies;
@@ -198,7 +198,7 @@ class JobsController extends Controller
 					$com->members = isset($item['comNumStaff']) ? $item['comNumStaff'] : '';
 					$com->web_url = isset($item['comWeb']) ? $item['comWeb'] : '';
 					$com->address = isset($item['contactAdd']) ? $item['contactAdd'] : '';
-					$com->careerlink_id = isset($item['comId']) ? $item['comId'] : '';
+					$com->careerlink_id = isset($comId) ? intval($comId) : '';
 					$com->save();
 					$comId = $com->id;
 				} else {
@@ -214,13 +214,14 @@ class JobsController extends Controller
 						$model->category_id = $catId ? $catId : 0;
 						$model->company_id = isset($com->id) ? $com->id : 0;
 						$model->title = isset($item['jobTitle']) ? $item['jobTitle'] : 0;
+						$model->description = isset($item['jobDes']) ? $item['jobDes'] : 0;
 						$model->contact_way = isset($item['contactWay']) ? $item['contactWay'] : 0;
 						$model->job_require = isset($item['jobSkills']) ? $item['jobSkills'] : 0;
 						$model->contact_des = isset($item['contactDes']) ? $item['contactDes'] : 0;
 						$model->contact_dep = isset($item['contactDepartment']) ? $item['contactDepartment'] : 0;
 						$model->contact_add = isset($item['contactAdd']) ? $item['contactAdd'] : 0;
 						$model->cv_lang = isset($item['cvLang']) ? $item['cvLang'] : 0;	
-						$model->career_link_id = isset($item['jobId']) ? $item['jobId'] : 0;	
+						$model->career_link_id = isset($item['jobId']) ? intval($item['jobId']) : 0;	
 						if($model->save()){
 							echo "saved";
 						} else {
@@ -260,12 +261,12 @@ class JobsController extends Controller
 				break;
 			} else {
 				$rsData[] = $crawler->getDetailPost($value);                              
+				//$rsData[] = $value;                              
 			}
 
 			$iter++;
 		}  
-		
-		
+		//print_r($rsData);die;			
 		return $rsData ;                     
 	}
 }

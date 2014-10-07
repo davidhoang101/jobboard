@@ -25,23 +25,23 @@ class SiteController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        $html = new simple_html_dom();
+        // $html = new simple_html_dom();
 
-        //get all pages of category
-        $crawler = new MyCrawler(
-            'http://www.careerlink.vn/viec-lam/cntt-phan-mem/19',
-            '/viec-lam/cntt-phan-mem/19?page=');
-        $allPages = $crawler->getAllPages();
+        // //get all pages of category
+        // $crawler = new MyCrawler(
+        //     'http://www.careerlink.vn/viec-lam/cntt-phan-mem/19',
+        //     '/viec-lam/cntt-phan-mem/19?page=');
+        // $allPages = $crawler->getAllPages();
 
-        //print_r($allPages);die;   
+        // //print_r($allPages);die;   
 
-        //get  
-        $allLinks = array();    
-        foreach ($allPages as $key => $value) {
-            $crawler->getAllLinkOfOnePage($value, $allLinks);
-        }
-        //get all link of one page
-        print_r($allLinks);die;  
+        // //get  
+        // $allLinks = array();    
+        // foreach ($allPages as $key => $value) {
+        //     $crawler->getAllLinkOfOnePage($value, $allLinks);
+        // }
+        // //get all link of one page
+        // print_r($allLinks);die;  
 
         $this->render('index');
     }
