@@ -19,39 +19,52 @@ class MyCrawler {
 
 		$comInfos = array();
 		$temp = array();
+
+/*
 		foreach ($html->find('div[class=ntd-chitietvieclam] table td') as $companyInfo) {			
 			 $comInfos[]= $companyInfo->plaintext;       
-		} 
+		} 		
 		$results['comName'] = $comInfos[1]; 
 		$results['comNumStaff'] = $comInfos[5]; 
 		$results['comWeb'] = $comInfos[3]; 
 		unset($comInfos);
-		foreach ($html->find('div[id=firmDescrip]') as $comDes) {
-			$comInfos[] = $comDes->plaintext;       
-		}   
-		$results['comDes'] = html_entity_decode($comInfos[0]); unset($comInfos);	
 
+
+		foreach ($html->find('div[id=firmDescrip]') as $comDes) {
+			$comInfos[] = $comDes->innertext;       
+		}   
+		$results['comDes'] = html_entity_decode($comInfos[0]); 
+		unset($comInfos);	
+
+
+		
 		foreach ($html->find('div[class=mceContentBody]') as $jobDes) {
-			$comInfos[] = $jobDes->plaintext;       
+			$comInfos[] = $jobDes->innertext;       
 		} 
 		$results['jobDes'] = html_entity_decode($comInfos[0]); 
 		$results['jobSkills'] = html_entity_decode($comInfos[1]); 
 		unset($comInfos);
 
-		foreach ($html->find('li[class=clearfix] span') as $contact) {
-			$comInfos[] = $contact->plaintext;       
+
+		
+		foreach ($html->find('li[class=clearfix]') as $contact) {
+			$comInfos[] = $contact->innertext;       
 		} 
-		$results['contactWay'] = html_entity_decode($comInfos[1]); 
-		$results['contactDes'] = html_entity_decode($comInfos[3]); 		
-		$results['contactDepartment'] = html_entity_decode($comInfos[6] . $comInfos[7]); 
-		$results['contactAdd'] = html_entity_decode(end($comInfos)); 
+		$results['contactWay'] = isset($comInfos[0]) ? html_entity_decode($comInfos[0]) : ''; 
+		$results['contactDes'] = isset($comInfos[1]) ? html_entity_decode($comInfos[1]) : ''; 		
+		$results['contactName'] = isset($comInfos[2]) ? html_entity_decode($comInfos[2]) : ''; 		
+		$results['contactAdd'] = isset($comInfos[3]) ? html_entity_decode($comInfos[3]) : ''; 
+		$results['contactPerson'] = isset($comInfos[4]) ? html_entity_decode($comInfos[4]) : ''; 
 		unset($comInfos);
 		
+		
 		foreach ($html->find('span[class=confi_text]') as $langCv) {
-			$comInfos[] = $langCv->plaintext;       
+			$comInfos[] = $langCv->innertext;       
 		}   
 		$results['cvLang'] = $comInfos[0]; 
 		unset($comInfos);
+
+		
 		foreach ($html->find('div[class=container] h1') as $jobTitle) {
 			$comInfos[] = $jobTitle->plaintext;       
 		}
@@ -61,7 +74,7 @@ class MyCrawler {
 		foreach ($html->find('a[class=lk-company]') as $com) {
 			//print_r($com->href);die;
 			//$comInfos[] = end(explode('/', $com->href));       
-			$comInfos[] = $com->href;       
+			$comInfos[] = end(explode('/', $com->href));       
 		}
 		$results['comId'] = $comInfos[0]; 
 		unset($comInfos);
@@ -72,7 +85,20 @@ class MyCrawler {
 		}	
 		$results['jobId'] = $comInfos[0]; 
 		unset($comInfos);
-				// /return $comInfos;
+				
+*/
+		foreach ($html->find('div[class=list-mota]') as $item) {			
+			foreach ($item->find('li a') as $key) {				
+				$results['categoryId'][] = end(explode('/', $key->href));
+			}
+		}	
+		//$results['jobId'] = $comInfos[0]; 
+		//unset($comInfos);
+
+
+
+		header('Content-Type: text/html; charset=utf-8');		
+		print_r($results);die;
 		return array_map('trim',$results);   
 	}
 	
