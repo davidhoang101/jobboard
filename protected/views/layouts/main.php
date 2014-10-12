@@ -29,11 +29,11 @@
 	<div id="mainmenu">
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
-				array('label'=>'Home', 'url'=>array('/site/index')),
-				array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-				array('label'=>'Contact', 'url'=>array('/site/contact')),
-				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
+				array('label'=>'Trang Chủ', 'url'=>array('/site/index')),
+				array('label'=>'Giới Thiệu', 'url'=>array('/site/page', 'view'=>'about')),
+				array('label'=>'Liên Hệ', 'url'=>array('/site/contact')),
+				array('label'=>'Đăng Nhập', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
+				array('label'=>'Đăng Xuất ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
 			),
 		)); ?>
 	</div><!-- mainmenu -->
@@ -48,9 +48,9 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+		Copyright &copy; <?php echo date('Y'); ?> by Trịnh Quốc Co.,Ltd.<br/>
 		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
+		<?php echo "Được Phát Triển bởi Trịnh Quốc"; ?>
 	</div><!-- footer -->
 
 </div><!-- page -->
