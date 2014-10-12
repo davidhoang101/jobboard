@@ -120,6 +120,7 @@ class MyCrawler {
 		//$comInfos['categoryId'][] = end(explode('/', $value->href));
 		$results['categoryId'] = $comInfos['categoryId'];	
 		$results['place_id']   = $comInfos['place_id'];					 
+		unset($comInfos);
 
 		$run = 0;
 		foreach ($html->find('div[class=list-mota] span[class=no-link]') as $right) {
@@ -130,8 +131,7 @@ class MyCrawler {
 			$jobCode = $comInfos[0];
 			$comInfos[] = array_shift($comInfos);
 			$comInfos[] = $jobCode;			
-		}
-		
+		}		
 		$results['job_level'] = $comInfos[0];
 		$results['applicant_level'] = $comInfos[1];
 		$results['applicant_experience'] = $comInfos[2];
@@ -148,8 +148,7 @@ class MyCrawler {
 		$results['created_on'] = $comInfos[0]; 
 		$results['end_date'] = $comInfos[1]; 
 		unset($comInfos);
-
-		//print_r($results);die;
+		
 		return $results;   
 	}
 	
