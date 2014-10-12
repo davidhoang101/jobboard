@@ -9,18 +9,28 @@
  * @property integer $category_id
  * @property integer $company_id
  * @property string $title
- * @property string $contact_way
  * @property string $description
  * @property string $job_require
+ * @property string $contact_way
  * @property string $contact_des
- * @property string $contact_dep
+ * @property string $contact_person
  * @property string $contact_add
+ * @property string $contact_name
+ * @property string $job_salary
  * @property string $cv_lang
+ * @property string $job_level
+ * @property string $applicant_level
+ * @property string $applicant_experience
  * @property string $created_on
+ * @property string $end_date
  * @property integer $is_temp
+ * @property string $applicant_gender
+ * @property string $applicant_age
+ * @property string $job_type
  * @property integer $is_active
  * @property integer $views_count
  * @property integer $career_link_id
+ * @property string $job_code
  */
 class Jobs extends CActiveRecord
 {
@@ -42,11 +52,12 @@ class Jobs extends CActiveRecord
 		return array(
 			array('type_id, category_id, company_id, is_temp, is_active, views_count, career_link_id', 'numerical', 'integerOnly'=>true),
 			array('title, contact_way', 'length', 'max'=>255),
-			array('cv_lang', 'length', 'max'=>200),
-			array('description, job_require, contact_des, contact_dep, contact_add, created_on', 'safe'),
+			array('contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, applicant_gender, applicant_age, job_type, job_code', 'length', 'max'=>200),
+			array('created_on, end_date', 'length', 'max'=>50),
+			array('description, job_require, contact_des, contact_person, contact_add', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type_id, category_id, company_id, title, contact_way, description, job_require, contact_des, contact_dep, contact_add, cv_lang, created_on, is_temp, is_active, views_count, career_link_id', 'safe', 'on'=>'search'),
+			array('id, type_id, category_id, company_id, title, description, job_require, contact_way, contact_des, contact_person, contact_add, contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, created_on, end_date, is_temp, applicant_gender, applicant_age, job_type, is_active, views_count, career_link_id, job_code', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -72,18 +83,28 @@ class Jobs extends CActiveRecord
 			'category_id' => 'Category',
 			'company_id' => 'Company',
 			'title' => 'Title',
-			'contact_way' => 'Contact Way',
 			'description' => 'Description',
 			'job_require' => 'Job Require',
+			'contact_way' => 'Contact Way',
 			'contact_des' => 'Contact Des',
-			'contact_dep' => 'Contact Dep',
+			'contact_person' => 'Contact Person',
 			'contact_add' => 'Contact Add',
+			'contact_name' => 'Contact Name',
+			'job_salary' => 'Job Salary',
 			'cv_lang' => 'Cv Lang',
+			'job_level' => 'Job Level',
+			'applicant_level' => 'Applicant Level',
+			'applicant_experience' => 'Applicant Experience',
 			'created_on' => 'Created On',
+			'end_date' => 'End Date',
 			'is_temp' => 'Is Temp',
+			'applicant_gender' => 'Applicant Gender',
+			'applicant_age' => 'Applicant Age',
+			'job_type' => 'Job Type',
 			'is_active' => 'Is Active',
 			'views_count' => 'Views Count',
 			'career_link_id' => 'Career Link',
+			'job_code' => 'Job Code',
 		);
 	}
 
@@ -110,18 +131,28 @@ class Jobs extends CActiveRecord
 		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('company_id',$this->company_id);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('contact_way',$this->contact_way,true);
 		$criteria->compare('description',$this->description,true);
 		$criteria->compare('job_require',$this->job_require,true);
+		$criteria->compare('contact_way',$this->contact_way,true);
 		$criteria->compare('contact_des',$this->contact_des,true);
-		$criteria->compare('contact_dep',$this->contact_dep,true);
+		$criteria->compare('contact_person',$this->contact_person,true);
 		$criteria->compare('contact_add',$this->contact_add,true);
+		$criteria->compare('contact_name',$this->contact_name,true);
+		$criteria->compare('job_salary',$this->job_salary,true);
 		$criteria->compare('cv_lang',$this->cv_lang,true);
+		$criteria->compare('job_level',$this->job_level,true);
+		$criteria->compare('applicant_level',$this->applicant_level,true);
+		$criteria->compare('applicant_experience',$this->applicant_experience,true);
 		$criteria->compare('created_on',$this->created_on,true);
+		$criteria->compare('end_date',$this->end_date,true);
 		$criteria->compare('is_temp',$this->is_temp);
+		$criteria->compare('applicant_gender',$this->applicant_gender,true);
+		$criteria->compare('applicant_age',$this->applicant_age,true);
+		$criteria->compare('job_type',$this->job_type,true);
 		$criteria->compare('is_active',$this->is_active);
 		$criteria->compare('views_count',$this->views_count);
 		$criteria->compare('career_link_id',$this->career_link_id);
+		$criteria->compare('job_code',$this->job_code,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

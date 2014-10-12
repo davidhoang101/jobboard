@@ -178,7 +178,7 @@ class JobsController extends Controller
 		$records = '';
 		$jobs = array();
 
-		//fetch data
+		//fetch data, if click on save data button
 		if(!empty($_POST['yt0'])) {	
 			$catId = $_POST['cate_id'];				
 			$jobs = $this->fetchData($_POST['cate_link'], $_POST['cate_pattern'],
@@ -188,49 +188,100 @@ class JobsController extends Controller
 			foreach($jobs as $item)
 			{
 				$comId = end(explode('/', $item['comId']));
-				$modelCom = Companies::model()->find('careerlink_id=' . $comId);			
+				$modelCom = Companies::model()->find('careerlink_id=' . $comId);
+				//if company does not exist,then insert			
 				if (empty($modelCom)) {
-					//insert company
+					//insert company			
 					$com = new Companies;
 					$com->name = isset($item['comName']) ? $item['comName'] : '';
 					$com->email = isset($item['contactDepartment']) ? $item['contactDepartment'] : '';
 					$com->description = isset($item['comDes']) ? $item['comDes'] : '';
 					$com->members = isset($item['comNumStaff']) ? $item['comNumStaff'] : '';
-					$com->web_url = isset($item['comWeb']) ? $item['comWeb'] : '';
-					$com->address = isset($item['contactAdd']) ? $item['contactAdd'] : '';
+					$com->web_url = isset($item['comWeb']) ? $item['comWeb'] : '';					
 					$com->careerlink_id = isset($comId) ? intval($comId) : '';
+					$com->address = isset($item['contactAdd']) ? $item['contactAdd'] : '';					
 					$com->save();
 					$comId = $com->id;
 				} else {
 					$comId = $modelCom->id;
 				}				
 				
-				//print_r($com->attributes);die;
-				if(!empty($comId)){					
-					$modelJob = Jobs::model()->find('career_link_id=' . $item['jobId']);
+				//if save company successfull				
+				if(!empty($comId)){
+					$ar = explode('/', $item['jobId']);
+					$jobId= $ar[3]; 								
+					$modelJob = Jobs::model()->find('career_link_id=' . $jobId);					
 					//insert job			
-					if (empty($modelJob)) {
+					if (empty($modelJob->id)) {
 						$model = new Jobs;
+					  //print_r($item);die;
 						$model->category_id = $catId ? $catId : 0;
-						$model->company_id = isset($com->id) ? $com->id : 0;
+						$model->company_id = isset($comId ) ? $comId : 0;
 						$model->title = isset($item['jobTitle']) ? $item['jobTitle'] : 0;
 						$model->description = isset($item['jobDes']) ? $item['jobDes'] : 0;
 						$model->contact_way = isset($item['contactWay']) ? $item['contactWay'] : 0;
 						$model->job_require = isset($item['jobSkills']) ? $item['jobSkills'] : 0;
 						$model->contact_des = isset($item['contactDes']) ? $item['contactDes'] : 0;
-						$model->contact_dep = isset($item['contactDepartment']) ? $item['contactDepartment'] : 0;
+						$model->contact_name = isset($item['contactName']) ? $item['contactName'] : 0;
+						$model->contact_person = isset($item['contactPerson']) ? $item['contactPerson'] : 0;
 						$model->contact_add = isset($item['contactAdd']) ? $item['contactAdd'] : 0;
 						$model->cv_lang = isset($item['cvLang']) ? $item['cvLang'] : 0;	
-						$model->career_link_id = isset($item['jobId']) ? intval($item['jobId']) : 0;	
-						if($model->save()){
-							echo "saved";
+						$model->career_link_id = isset($jobId) ? intval($jobId) : 0;	
+						$model->job_salary = isset($item['job_salary']) ? $item['job_salary'] : '';
+						$model->job_level = isset($item['job_level']) ? $item['job_level'] : '';
+						$model->applicant_level = isset($item['applicant_level']) ? $item['applicant_level'] : '';
+						$model->applicant_experience = isset($item['applicant_experience']) ? $item['applicant_experience'] : '';
+						$model->applicant_experience = isset($item['applicant_experience']) ? $item['applicant_experience'] : '';
+						$model->created_on = isset($item['created_on']) ? $item['created_on'] : '';
+						$model->end_date = isset($item['end_date']) ? $item['end_date'] : '';
+						$model->applicant_gender = isset($item['applicant_gender']) ? $item['applicant_gender'] : '';
+						$model->applicant_age = isset($item['applicant_age']) ? $item['applicant_age'] : '';
+						$model->job_type = isset($item['job_type']) ? $item['job_type'] : '';
+						$model->job_code = isset($item['job_code']) ? $item['job_code'] : '';
+						if($model->save()){		
+
+							if(!empty($item['place_id'])) {
+								foreach ($item['place_id'] as $key => $value) {
+									  $value = end(explode('/', $value));
+									if (!JobPlaces::model()->exists('job_id=? AND place_id=?',array($model->id, $value))){
+										$jpModel = new JobPlaces;
+										$jpModel->job_id = $model->id;
+										$jpModel->place_id = $value;
+										if(!$jpModel->save()){
+											print_r($jpModel->getErrors());
+										};
+									}									
+								}
+								
+							}
+
+							if(!empty($item['categoryId'])) {
+								foreach ($item['categoryId'] as $keyp => $valuep) {
+									if (is_numeric(end(explode('/', $valuep)))){										
+										if (!JobCategory::model()->exists('job_id=? AND category_id=?',array($model->id, $valuep))){
+											$jcModel = new JobCategory;
+											$jcModel->job_id = $model->id;
+											$jcModel->category_id = end(explode('/', $valuep));
+											$jcModel->save();
+											if(!$jcModel->save()){
+												echo 'job cate';
+												print_r($jcModel->getErrors());
+											};
+										}
+									}										
+								}
+								
+							}
+					
 						} else {
+							echo "job";
 							print_r($model->getErrors());
 						}
 					}					
 					
 
 				} else {
+					echo "company";
 					print_r($com->getErrors());
 				}
 			}

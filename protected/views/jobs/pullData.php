@@ -36,7 +36,7 @@
 
 <div class="row">
     <label>Number of record (type 0 for select all)</label>
-    <input size="100" name="nums" value="1" placeholder = "0"/>
+    <input size="100" name="nums" value="2" placeholder = "0"/>
 </div>
 <div class="row submit">
     <?php echo CHtml::submitButton('Save Data'); ?>        

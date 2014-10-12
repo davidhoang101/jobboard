@@ -13,6 +13,7 @@ class MyCrawler {
 
 	//get detail of post
 	function getDetailPost($postUrl){
+		header('Content-Type: text/html; charset=utf-8');		
 		$results = array();
 		$html = new simple_html_dom();
 		$html->load_file($postUrl);
@@ -20,7 +21,7 @@ class MyCrawler {
 		$comInfos = array();
 		$temp = array();
 
-/*
+
 		foreach ($html->find('div[class=ntd-chitietvieclam] table td') as $companyInfo) {			
 			 $comInfos[]= $companyInfo->plaintext;       
 		} 		
@@ -70,36 +71,86 @@ class MyCrawler {
 		}
 		$results['jobTitle'] = $comInfos[0]; 
 		unset($comInfos);
-		
-		foreach ($html->find('a[class=lk-company]') as $com) {
-			//print_r($com->href);die;
+	
+	
+		foreach ($html->find('a[class=lk-company]') as $com) {			     
+			$comInfos[] = $com->href;       
 			//$comInfos[] = end(explode('/', $com->href));       
-			$comInfos[] = end(explode('/', $com->href));       
 		}
 		$results['comId'] = $comInfos[0]; 
 		unset($comInfos);
 
 		foreach ($html->find('a[class=nop]') as $jjoob) {
-			$ar = explode('/', $jjoob->href);
-			$comInfos[] = $ar[3];       
+			// $ar = explode('/', $jjoob->href);
+			// $comInfos[] = $ar[3];    
+			$comInfos[] = $jjoob->href;    
 		}	
 		$results['jobId'] = $comInfos[0]; 
 		unset($comInfos);
 				
-*/
+
 		foreach ($html->find('div[class=list-mota]') as $item) {			
-			foreach ($item->find('li a') as $key) {				
-				$results['categoryId'][] = end(explode('/', $key->href));
+			foreach ($item->find('li a') as $key) {							
+				$comInfos[] = $key->href;
 			}
 		}	
-		//$results['jobId'] = $comInfos[0]; 
-		//unset($comInfos);
+		$results['categoryId'] = $comInfos;
+		unset($comInfos);
+		// foreach ($comInfos as $key => $value) {
+		// 	if (is_numeric(end(explode('/', $value)))){
+		// 		$results['categoryId'][] = $comInfos;
+		// 	}
+		// }
+		
 
+		$iter = 0;
+		foreach ($html->find('div[class=list-mota] ul li ul') as $right) {			
+			if ($iter == 0) {
+				foreach ($right->find('a') as $value) {
+					$comInfos['categoryId'][] = $value->href;
+				}
+			}
+			if ($iter == 1) {				
+				foreach ($right->find('a') as $r2val) {
+					$comInfos['place_id'][] = $r2val->href;
+				}
+			}
+			$iter++;			
+		}
+		//$comInfos['categoryId'][] = end(explode('/', $value->href));
+		$results['categoryId'] = $comInfos['categoryId'];	
+		$results['place_id']   = $comInfos['place_id'];					 
 
+		$run = 0;
+		foreach ($html->find('div[class=list-mota] span[class=no-link]') as $right) {
+			$run++;
+			$comInfos[] = $right->innertext;    							
+		}				
+		if ($run == 8) {
+			$jobCode = $comInfos[0];
+			$comInfos[] = array_shift($comInfos);
+			$comInfos[] = $jobCode;			
+		}
+		
+		$results['job_level'] = $comInfos[0];
+		$results['applicant_level'] = $comInfos[1];
+		$results['applicant_experience'] = $comInfos[2];
+		$results['job_type'] = $comInfos[3];
+		$results['job_salary'] = $comInfos[4];
+		$results['applicant_age'] = $comInfos[5];
+		$results['applicant_gender'] = $comInfos[6];
+		$results['job_code'] = isset($comInfos[7]) ? $comInfos[7] : NULL;
+		unset($comInfos);		
 
-		header('Content-Type: text/html; charset=utf-8');		
-		print_r($results);die;
-		return array_map('trim',$results);   
+		foreach ($html->find('div[class=ngaydang] span') as $ddt) {			
+			$comInfos[] = $ddt->plaintext;       
+		}		
+		$results['created_on'] = $comInfos[0]; 
+		$results['end_date'] = $comInfos[1]; 
+		unset($comInfos);
+
+		//print_r($results);die;
+		return $results;   
 	}
 	
 	/*

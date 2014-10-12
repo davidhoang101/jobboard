@@ -38,11 +38,11 @@ class Companies extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('city_id, careerlink_id', 'numerical', 'integerOnly'=>true),
-			array('name, email', 'length', 'max'=>100),
+			array('email', 'length', 'max'=>100),
 			array('password', 'length', 'max'=>32),
-			array('members, phone, fax', 'length', 'max'=>50),
-			array('web_url, logo_url, address', 'length', 'max'=>255),
-			array('description, created_on', 'safe'),
+			array('members, web_url, logo_url', 'length', 'max'=>255),
+			array('phone, fax', 'length', 'max'=>50),
+			array('name, description, address, created_on', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, name, email, password, description, members, web_url, logo_url, address, city_id, phone, created_on, fax, careerlink_id', 'safe', 'on'=>'search'),
