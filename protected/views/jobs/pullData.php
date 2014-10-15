@@ -2,31 +2,32 @@
     <?php echo CHtml::beginForm(); ?>
 
     <?php //echo CHtml::errorSummary($model); ?>
-    <div class="row">
-     <label><?php echo !empty($records_found) ? 'Fetched records' : ''; ?></label><label><?php echo $records_found; ?></label>        
- </div>
+        <div class="row">
+         <label><?php echo !empty($records_found) ? 'Fetched records' : ''; ?></label><label><?php echo $records_found; ?></label>        
+     </div>
+
  <div class="row">
-    <label>Category Name</label>   
+    <label>Nguồn Lấy Tin</label>
+    <?php echo CHtml::dropDownList('test','1',array(
+        '1'=>'careeerlink.vn',
+        '2'=>'hcm.vieclam.24h.com.vn',
+        '3'=>'timviecnhanh.com',
+        '4'=>'http://vieclam.tuoitre.vn/vi',
+    )) ?>
+</div>
+ <div class="row">
+    <label>Danh Mục Lấy</label>   
     <select name="cate_id">
         <?php
             foreach ($cates as $key => $value) {                               
         ?>
-      <option <?php echo (isset($_POST['cate_id']) && $_POST['cate_id']==$value->id) ? 'selected' : ''; ?> value="<?php echo $value->id ?>"><?php echo $value->name; ?></option>
+        <option <?php echo (isset($_POST['cate_id']) && $_POST['cate_id']==$value->id) ? 'selected' : ''; ?> value="<?php echo $value->id ?>"><?php echo $value->name; ?></option>
       <?php
         }
       ?>    
   </select>
 </div>
 
-    <div class="row">
-        <label>Nguồn Lấy Tin</label>
-        <?php echo CHtml::dropDownList('test','1',array(
-            '1'=>'careeerlink.vn',
-            '2'=>'hcm.vieclam.24h.com.vn',
-            '3'=>'timviecnhanh.com',
-            '4'=>'http://vieclam.tuoitre.vn/vi/tim-viec-nhanh.html',
-        )) ?>
-    </div>
 
 <div class="row">
     <label>Link tìm theo thể loại</label>

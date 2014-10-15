@@ -172,15 +172,14 @@ class JobsController extends Controller
 	}
 
 	public function actionPullData(){	
-
-		$cates = Categories::model()->findAll(array('select'=>'id,name'));
-		
+		$cates = Categories::model()->findAll(array('select'=>'id,name'));		
 		$records = '';
 		$jobs = array();
 
 		//fetch data, if click on save data button
 		if(!empty($_POST['yt0'])) {	
-			$catId = $_POST['cate_id'];				
+			$catId = $_POST['cate_id'];		
+
 			$jobs = $this->fetchData($_POST['cate_link'], $_POST['cate_pattern'],
 				array($_POST['cate_from_page'], $_POST['cate_to_page']), $_POST['nums']);			
 			$records = count($jobs);	
@@ -291,10 +290,8 @@ class JobsController extends Controller
 		$this->render('pullData',array('records_found' => $records,'cates' => $cates));
 	}
 
-	public function fetchData($cateLink = 'http://www.careerlink.vn/viec-lam/cntt-phan-mem19',
-		$catePattern = '/viec-lam/cntt-phan-mem/19?page=',$offsetLimit = array(1,1), $limit = 1){
-		
-		$html = new simple_html_dom();        
+
+	public function fetchData($cateLink,$catePattern,$offsetLimit = array(1,1), $limit = 1){				
         //get all pages of category
 		$crawler = new MyCrawler($cateLink,$catePattern);
 		$allPages = $crawler->getAllPages($offsetLimit);		
@@ -311,8 +308,7 @@ class JobsController extends Controller
 			if($iter > $limit && $limit != 0){
 				break;
 			} else {
-				$rsData[] = $crawler->getDetailPost($value);                              
-				//$rsData[] = $value;                              
+				$rsData[] = $crawler->getDetailPost($value);                              				                          
 			}
 
 			$iter++;

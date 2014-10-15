@@ -1,17 +1,10 @@
 <?php
-class MyCrawler {
+class VlttCrawler {
 
-	public $baseUrl = 'http://www.careerlink.vn';
-	public $categoryLinkPattern = '/viec-lam/cntt-phan-mem/19?page=';
-	public $cateUrl = 'http://www.careerlink.vn/viec-lam/cntt-phan-mem/19';
+	public $baseUrl = 'http://vieclam.tuoitre.vn/vi';
+	public $categoryLinkPattern = '/tim-viec-lam/nganh-nghe/cntt-phan-mem/limit/20/page/';
+	public $cateUrl = 'http://vieclam.tuoitre.vn/vi/tim-viec-lam/nganh-nghe/cntt-phan-mem';
 
-	public function init($baseUrl, $cateUrl, $categoryLinkPattern){
-		$this->categoryLinkPattern = $categoryLinkPattern;
-		$this->cateUrl = $cateUrl;
-		$this->baseUrl = $baseUrl;		
-	}
-	
-	
 	/*
 	*get all page of category
 	*input: offsetLimit : from page to page
