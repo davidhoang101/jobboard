@@ -31,11 +31,11 @@
 
 <div class="row">
     <label>Link tìm theo thể loại</label>
-    <input size="100" name="cate_link" value="http://www.careerlink.vn/viec-lam/cntt-phan-mem19" placeholder="http://www.careerlink.vn/viec-lam/cntt-phan-mem19"/>
+    <input size="100" name="cate_link" value="http://vieclam.tuoitre.vn/vi/tim-viec-lam/nganh-nghe/cntt-phan-mem" placeholder="http://www.careerlink.vn/viec-lam/cntt-phan-mem19"/>
 </div>
 <div class="row">
     <label>Chi tiết link</label>
-    <input size="100" name="cate_pattern" value="/viec-lam/cntt-phan-mem/19?page=" placeholder="/viec-lam/cntt-phan-mem/19?page=" />
+    <input size="100" name="cate_pattern" value="/tim-viec-lam/nganh-nghe/cntt-phan-mem/limit/20/page/" placeholder="/viec-lam/cntt-phan-mem/19?page=" />
 </div>
 <div class="row">
     <label>Từ trang số</label>
@@ -43,12 +43,12 @@
 </div>
 <div class="row">
     <label>Tới page số</label>
-    <input size="100" name="cate_to_page" value="1" placeholder = "3"/>
+    <input size="100" name="cate_to_page" value="2" placeholder = "2"/>
 </div>
 
 <div class="row">
     <label>Số bản ghi (chọn 0 cho tất cả)</label>
-    <input size="100" name="nums" value="0" placeholder = "0"/>
+    <input size="100" name="nums" value="2" placeholder = "0"/>
 </div>
 <div class="row submit">
     <?php echo CHtml::submitButton('Lưu dữ liệu'); ?>
