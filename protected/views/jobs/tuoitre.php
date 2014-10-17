@@ -3,7 +3,7 @@
 
     <?php //echo CHtml::errorSummary($model); ?>
         <div class="row">
-         <label><?php echo !empty($records_found) ? 'Fetched records' : ''; ?></label><label><?php echo $records_found; ?></label>        
+         <label><?php echo !empty($records_found) ? 'Tin đã lấy thành công' : ''; ?></label><label><?php echo $records_found; ?></label>        
      </div>
 
  <div class="row">

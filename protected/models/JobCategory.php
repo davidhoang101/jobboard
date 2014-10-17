@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'job_category':
  * @property integer $id
  * @property integer $job_id
- * @property integer $category_id
+ * @property string $category_id
  */
 class JobCategory extends CActiveRecord
 {
@@ -27,7 +27,8 @@ class JobCategory extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('job_id, category_id', 'required'),
-			array('job_id, category_id', 'numerical', 'integerOnly'=>true),
+			array('job_id', 'numerical', 'integerOnly'=>true),
+			array('category_id', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, job_id, category_id', 'safe', 'on'=>'search'),
@@ -77,7 +78,7 @@ class JobCategory extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('job_id',$this->job_id);
-		$criteria->compare('category_id',$this->category_id);
+		$criteria->compare('category_id',$this->category_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

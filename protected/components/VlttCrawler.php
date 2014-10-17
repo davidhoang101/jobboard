@@ -43,7 +43,8 @@ class VlttCrawler {
 		$comInfos = array();
 		$temp = array();
 		
-		$results['comName'] = $html->find('div[class=tit_company]',0)->plaintext;								
+		$results['comName'] = isset($html->find('div[class=tit_company]',0)->plaintext) ?
+								$html->find('div[class=tit_company]',0)->plaintext : '';								
 		$results['comNumStaff'] = NULL; 
 		$results['comWeb'] = NULL; 
 
@@ -93,22 +94,25 @@ class VlttCrawler {
 			$results['place_id'][] = substr(strrchr($pla->href, '/'),1);
 		}
 		
-		$results['job_level'] = $html->find('label[itemprop=occupationalCategory]',0)->plaintext;		
+		$results['job_level'] = isset($html->find('label[itemprop=occupationalCategory]',0)->plaintext) ?
+								$html->find('label[itemprop=occupationalCategory]',0)->plaintext : '';		
 		$results['applicant_level'] = '';
 		$results['applicant_experience'] = $html->find('.DetailJobNew',0) ? 
-						$html->find('.DetailJobNew',0)->children(1)->children(0)->plaintext : '';	
+						trim(str_replace('Kinh nghiệm:', '', $html->find('.DetailJobNew',0)->children(1)->children(0)->plaintext)) : '';	
 		$results['job_type'] = '';
 		$results['job_salary'] = $html->find('.DetailJobNew',0) ? 
-						$html->find('.DetailJobNew',0)->children(1)->children(1)->plaintext : '';
+						trim(str_replace('Lương:', '', $html->find('.DetailJobNew',0)->children(1)->children(1)->plaintext)) : '';
 		$results['applicant_age'] = '';
 		$results['applicant_gender'] = '';
 		$results['job_code'] = '';
 
-		$results['created_on'] = $html->find('.datepost',0)->plaintext; 
-		$results['end_date'] = $html->find('.DetailJobNew',0) ? 
-						$html->find('.DetailJobNew',0)->children(2)->children(1)->plaintext : '';; 
+		$results['created_on'] = $html->find('.datepost',0) ?
+								trim(str_replace('Ngày đăng:', '',$html->find('.datepost',0)->plaintext)) : ''; 
+		$results['end_date'] = ($html->find('.DetailJobNew',0) && $html->find('.DetailJobNew',0)->children(2)
+								 && $html->find('.DetailJobNew',0)->children(2)->children(1))? 
+						$html->find('.DetailJobNew',0)->children(2)->children(1)->plaintext : '';
 		
-		//print_r($results);die;
+		
 		return $results;   
 	}
 
@@ -117,7 +121,7 @@ class VlttCrawler {
 	function getAllLinkOfOnePage($pageLink, &$results){		
 		$html = new simple_html_dom();
 		$html->load_file($pageLink);
-		$items = $html->find('span[class=jobtitle] a');
+		$items = $html->find('dd[class=] span[class=jobtitle] a');
 		foreach ($items as $link) {  
 			$results[] = $this->baseUrl . $link->href;
 		}

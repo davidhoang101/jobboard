@@ -17,7 +17,7 @@
  * @property string $phone
  * @property string $created_on
  * @property string $fax
- * @property integer $careerlink_id
+ * @property string $careerlink_id
  */
 class Companies extends CActiveRecord
 {
@@ -37,11 +37,11 @@ class Companies extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('city_id, careerlink_id', 'numerical', 'integerOnly'=>true),
+			array('city_id', 'numerical', 'integerOnly'=>true),
 			array('email', 'length', 'max'=>100),
 			array('password', 'length', 'max'=>32),
 			array('members, web_url, logo_url', 'length', 'max'=>255),
-			array('phone, fax', 'length', 'max'=>50),
+			array('phone, fax, careerlink_id', 'length', 'max'=>50),
 			array('name, description, address, created_on', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -114,7 +114,7 @@ class Companies extends CActiveRecord
 		$criteria->compare('phone',$this->phone,true);
 		$criteria->compare('created_on',$this->created_on,true);
 		$criteria->compare('fax',$this->fax,true);
-		$criteria->compare('careerlink_id',$this->careerlink_id);
+		$criteria->compare('careerlink_id',$this->careerlink_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

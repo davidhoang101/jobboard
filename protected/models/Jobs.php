@@ -29,7 +29,7 @@
  * @property string $job_type
  * @property integer $is_active
  * @property integer $views_count
- * @property integer $career_link_id
+ * @property string $career_link_id
  * @property string $job_code
  */
 class Jobs extends CActiveRecord
@@ -50,10 +50,10 @@ class Jobs extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('type_id, category_id, company_id, is_temp, is_active, views_count, career_link_id', 'numerical', 'integerOnly'=>true),
+			array('type_id, category_id, company_id, is_temp, is_active, views_count', 'numerical', 'integerOnly'=>true),
 			array('title, contact_way', 'length', 'max'=>255),
 			array('contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, applicant_gender, applicant_age, job_type, job_code', 'length', 'max'=>200),
-			array('created_on, end_date', 'length', 'max'=>50),
+			array('created_on, end_date, career_link_id', 'length', 'max'=>50),
 			array('description, job_require, contact_des, contact_person, contact_add', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -151,7 +151,7 @@ class Jobs extends CActiveRecord
 		$criteria->compare('job_type',$this->job_type,true);
 		$criteria->compare('is_active',$this->is_active);
 		$criteria->compare('views_count',$this->views_count);
-		$criteria->compare('career_link_id',$this->career_link_id);
+		$criteria->compare('career_link_id',$this->career_link_id,true);
 		$criteria->compare('job_code',$this->job_code,true);
 
 		return new CActiveDataProvider($this, array(
