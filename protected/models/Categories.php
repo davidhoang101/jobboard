@@ -12,6 +12,7 @@
  */
 class Categories extends CActiveRecord
 {
+	public $jobcount;
 	/**
 	 * @return string the associated database table name
 	 */

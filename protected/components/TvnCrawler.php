@@ -12,13 +12,12 @@ class TvnCrawler {
 
 	public function fetchData($fromPage, $toPage, $limitRecords){				
         //get all pages of category		
-		$allPages = $this->getPageLink($fromPage, $toPage);				
+		$allPages = $this->getPageLink($fromPage, $toPage);					
         //get  all link of this category
 		$allLinks = array();  
 		foreach ($allPages as $key => $value) {
 			$this->getAllLinkOfOnePage($value, $allLinks);
-		}
-		
+		}		
 		$rsData = array();
 		$iter = 1;
 		foreach ($allLinks as $key => $value) {        
@@ -29,7 +28,7 @@ class TvnCrawler {
 			}
 			$iter++;
 		}  
-		//print_r($rsData);die;			
+					
 		return $rsData ;                     
 	}
 
@@ -43,12 +42,13 @@ class TvnCrawler {
 		$comInfos = array();
 		$temp = array();
 		
-		$results['comName'] = isset($html->find('div[class=tit_company]',0)->plaintext) ?
-								$html->find('div[class=tit_company]',0)->plaintext : '';								
-		$results['comNumStaff'] = NULL; 
+		$results['comName'] = $html->find('div[class=col-xs-6]',0)->children(0) ?
+								$html->find('div[class=col-xs-6]',0)->children(0)->plaintext : '';								
+		$results['comNumStaff'] = $html->find('table[class=no-border]',0)->children(0)->children(2)->children(0) ?
+								$html->find('div[class=no-border]',0)->children(0)->children(2)->children(0)->plaintext : ''; 
 		$results['comWeb'] = NULL; 
 
-
+		/*
 		$results['comDes'] = $html->find('#emp_more') ? 
 						$html->find('#emp_more',0)->plaintext : '';
 
@@ -112,7 +112,8 @@ class TvnCrawler {
 								 && $html->find('.DetailJobNew',0)->children(2)->children(1))? 
 						$html->find('.DetailJobNew',0)->children(2)->children(1)->plaintext : '';
 		
-		
+		*/
+		print_r($results);die;
 		return $results;   
 	}
 
@@ -120,10 +121,9 @@ class TvnCrawler {
 	//pageLink: http://www.careerlink.vn/viec-lam/cntt-phan-mem/19?page=2
 	function getAllLinkOfOnePage($pageLink, &$results){		
 		$html = new simple_html_dom();
-		$html->load_file($pageLink);
-		$items = $html->find('dd[class=] span[class=jobtitle] a');
-		foreach ($items as $link) {  
-			$results[] = $this->baseUrl . $link->href;
+		$html->load_file($pageLink);		
+		foreach ($html->find('a[class=item]') as $link) {  
+			$results[] = $link->href;
 		}
 		return $results;
 	}

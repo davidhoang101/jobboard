@@ -7,14 +7,9 @@
      </div>
 
  <div class="row">
-    <label>Nguồn Lấy Tin</label>
-    <?php echo CHtml::dropDownList('test','1',array(
-        '1'=>'careeerlink.vn',
-        '2'=>'hcm.vieclam.24h.com.vn',
-        '3'=>'timviecnhanh.com',
-        '4'=>'http://vieclam.tuoitre.vn/vi',
-    )) ?>
-</div>
+    <label>Nguồn lấy tin</label><br />
+    <label>http://vieclam.tuoitre.vn/</label>
+</div><br />
  <div class="row">
     <label>Danh Mục Lấy</label>   
     <select name="cate_id">
@@ -53,20 +48,5 @@
 <div class="row submit">
     <?php echo CHtml::submitButton('Lưu dữ liệu'); ?>
 </div>
- <!-- 
-    <div class="row">
-        <?php //echo CHtml::activeLabel($model,'password'); ?>
-        <?php //echo CHtml::activePasswordField($model,'password') ?>
-    </div>
- 
-    <div class="row rememberMe">
-        <?php //echo CHtml::activeCheckBox($model,'rememberMe'); ?>
-        <?php //echo CHtml::activeLabel($model,'rememberMe'); ?>
-    </div>
- 
-    <div class="row submit">
-        <?php echo CHtml::submitButton('Login'); ?>
-    </div> -->
-
-    <?php echo CHtml::endForm(); ?>
+  <?php echo CHtml::endForm(); ?>
 </div><!-- form -->

@@ -5,6 +5,12 @@
     <div class="row">
      <label><?php echo !empty($records_found) ? 'Tin đã lấy thành công' : ''; ?></label><label><?php echo $records_found; ?></label>        
  </div>
+
+ <div class="row">
+    <label>Nguồn lấy tin</label><br />
+    <label>http://www.careerlink.vn/</label>
+</div><br />
+
  <div class="row">
     <label>Category Name</label>   
     <select name="cate_id">
@@ -17,6 +23,7 @@
       ?>    
   </select>
 </div>
+
 <div class="row">
     <label>Category Link</label>
     <input size="100" name="cate_link" value="http://www.careerlink.vn/viec-lam/cntt-phan-mem19" placeholder="http://www.careerlink.vn/viec-lam/cntt-phan-mem19"/>
@@ -39,22 +46,8 @@
     <input size="100" name="nums" value="1" placeholder = "0"/>
 </div>
 <div class="row submit">
-    <?php echo CHtml::submitButton('Save Data'); ?>        
+    <?php echo CHtml::submitButton('Lưu Dữ Liệu'); ?>        
 </div>
- <!-- 
-    <div class="row">
-        <?php //echo CHtml::activeLabel($model,'password'); ?>
-        <?php //echo CHtml::activePasswordField($model,'password') ?>
-    </div>
- 
-    <div class="row rememberMe">
-        <?php //echo CHtml::activeCheckBox($model,'rememberMe'); ?>
-        <?php //echo CHtml::activeLabel($model,'rememberMe'); ?>
-    </div>
- 
-    <div class="row submit">
-        <?php echo CHtml::submitButton('Login'); ?>
-    </div> -->
 
     <?php echo CHtml::endForm(); ?>
 </div><!-- form -->

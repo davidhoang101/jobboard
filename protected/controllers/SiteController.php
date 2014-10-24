@@ -28,7 +28,7 @@ class SiteController extends Controller {
         Yii::app()->theme="jobboard";
         $this->layout='//layouts/home';
         $this->render('index');
-    }
+    }    
 
    /* public function getArticles($page) {
 

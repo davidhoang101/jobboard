@@ -199,6 +199,8 @@ class JobsController extends Controller
 					$com->web_url = isset($item['comWeb']) ? $item['comWeb'] : '';					
 					$com->careerlink_id = isset($comId) ? intval($comId) : '';
 					$com->address = isset($item['contactAdd']) ? $item['contactAdd'] : '';					
+					$com->logo_url = isset($item['logo_url']) ? $item['logo_url'] : '';					
+					$com->logo_url = isset($item['logo_url']) ? $item['logo_url'] : '';					
 					$com->save();
 					$comId = $com->id;
 				} else {
@@ -440,7 +442,7 @@ class JobsController extends Controller
 		//fetch data, if click on save data button
 		if(!empty($_POST['yt0'])) {	
 			$catId = $_POST['cate_id'];		
-			$crawler = new VlttCrawler($_POST['cate_link'],$_POST['cate_pattern']);
+			$crawler = new TvnCrawler($_POST['cate_link'],$_POST['cate_pattern']);
 			$jobs = $crawler->fetchData($_POST['cate_from_page'], $_POST['cate_to_page'], $_POST['nums']);			
 			$records = count($jobs);	
 			
@@ -544,7 +546,7 @@ class JobsController extends Controller
 			unset($jobs);		
 		}			
 
-		$this->render('tuoitre',array('records_found' => $records,'cates' => $cates));
+		$this->render('timviecnhanh',array('records_found' => $records,'cates' => $cates));
 	}
 	
 }

@@ -59,11 +59,19 @@ class MyCrawler {
 
 		foreach ($html->find('div[class=ntd-chitietvieclam] table td') as $companyInfo) {			
 			 $comInfos[]= $companyInfo->plaintext;       
-		} 		
-		$results['comName'] = $comInfos[1]; 
-		$results['comNumStaff'] = $comInfos[5]; 
-		$results['comWeb'] = $comInfos[3]; 
-		unset($comInfos);
+		} 	
+		
+		if (count($comInfos) == 6)	{
+			$results['comName'] = $comInfos[1]; 			
+			$results['comWeb'] = ''; 
+			$results['comNumStaff'] = $comInfos[3]; 
+			unset($comInfos);
+		} else {
+			$results['comName'] = $comInfos[1]; 			
+			$results['comWeb'] = $comInfos[3];
+			$results['comNumStaff'] = $comInfos[5]; 
+			unset($comInfos);
+		}
 
 
 		foreach ($html->find('div[id=firmDescrip]') as $comDes) {
@@ -84,13 +92,13 @@ class MyCrawler {
 
 		
 		foreach ($html->find('li[class=clearfix]') as $contact) {
-			$comInfos[] = $contact->innertext;       
+			$comInfos[] = $contact->plaintext;       
 		} 
-		$results['contactWay'] = isset($comInfos[0]) ? html_entity_decode($comInfos[0]) : ''; 
-		$results['contactDes'] = isset($comInfos[1]) ? html_entity_decode($comInfos[1]) : ''; 		
-		$results['contactName'] = isset($comInfos[2]) ? html_entity_decode($comInfos[2]) : ''; 		
-		$results['contactAdd'] = isset($comInfos[3]) ? html_entity_decode($comInfos[3]) : ''; 
-		$results['contactPerson'] = isset($comInfos[4]) ? html_entity_decode($comInfos[4]) : ''; 
+		$results['contactWay'] = isset($comInfos[0]) ? trim(str_replace('Cách liên hệ:', '', html_entity_decode($comInfos[0]))) : ''; 
+		$results['contactDes'] = isset($comInfos[1]) ? trim(str_replace('Mô tả:', '', html_entity_decode($comInfos[1]))) : ''; 		
+		$results['contactName'] = isset($comInfos[2]) ? trim(str_replace('Tên liên hệ:', '', html_entity_decode($comInfos[2]))) : ''; 		
+		$results['contactAdd'] = isset($comInfos[3]) ? trim(str_replace('Địa chỉ:', '', html_entity_decode($comInfos[3]))) : ''; 
+		$results['contactPerson'] = isset($comInfos[4]) ? trim(str_replace('Nguời liên hệ:','',html_entity_decode($comInfos[4]))) : ''; 
 		unset($comInfos);
 		
 		
@@ -109,34 +117,24 @@ class MyCrawler {
 	
 	
 		foreach ($html->find('a[class=lk-company]') as $com) {			     
-			$comInfos[] = $com->href;       
-			//$comInfos[] = end(explode('/', $com->href));       
+			$comInfos[] = $com->href;       			  
 		}
 		$results['comId'] = $comInfos[0]; 
 		unset($comInfos);
 
-		foreach ($html->find('a[class=nop]') as $jjoob) {
-			// $ar = explode('/', $jjoob->href);
-			// $comInfos[] = $ar[3];    
+		foreach ($html->find('a[class=nop]') as $jjoob) {			
 			$comInfos[] = $jjoob->href;    
 		}	
 		$results['jobId'] = $comInfos[0]; 
 		unset($comInfos);
 				
-
 		foreach ($html->find('div[class=list-mota]') as $item) {			
 			foreach ($item->find('li a') as $key) {							
 				$comInfos[] = $key->href;
 			}
 		}	
 		$results['categoryId'] = $comInfos;
-		unset($comInfos);
-		// foreach ($comInfos as $key => $value) {
-		// 	if (is_numeric(end(explode('/', $value)))){
-		// 		$results['categoryId'][] = $comInfos;
-		// 	}
-		// }
-		
+		unset($comInfos);				
 
 		$iter = 0;
 		foreach ($html->find('div[class=list-mota] ul li ul') as $right) {			
@@ -152,7 +150,7 @@ class MyCrawler {
 			}
 			$iter++;			
 		}
-		//$comInfos['categoryId'][] = end(explode('/', $value->href));
+		
 		$results['categoryId'] = $comInfos['categoryId'];	
 		$results['place_id']   = $comInfos['place_id'];					 
 		unset($comInfos);
@@ -180,9 +178,13 @@ class MyCrawler {
 		foreach ($html->find('div[class=ngaydang] span') as $ddt) {			
 			$comInfos[] = $ddt->plaintext;       
 		}		
-		$results['created_on'] = $comInfos[0]; 
+		$results['created_on'] = trim($comInfos[0]); 
 		$results['end_date'] = $comInfos[1]; 
 		unset($comInfos);
+		
+		$results['logo_url'] = $html->find('.ttchung',0)->children(0) ? 
+						$this->baseUrl . $html->find('.ttchung',0)->children(0)->src : '';
+
 		
 		return $results;   
 	}

@@ -7,14 +7,9 @@
      </div>
 
  <div class="row">
-    <label>Nguồn Lấy Tin</label>
-    <?php echo CHtml::dropDownList('test','1',array(
-        '1'=>'careeerlink.vn',
-        '2'=>'hcm.vieclam.24h.com.vn',
-        '3'=>'timviecnhanh.com',
-        '4'=>'http://vieclam.tuoitre.vn/vi',
-    )) ?>
-</div>
+    <label>Nguồn lấy tin</label><br />
+    <label>http://www.timviecnhanh.com/</label>
+</div><br />
  <div class="row">
     <label>Danh Mục Lấy</label>   
     <select name="cate_id">
@@ -31,11 +26,11 @@
 
 <div class="row">
     <label>Link tìm theo thể loại</label>
-    <input size="100" name="cate_link" value="http://vieclam.tuoitre.vn/vi/tim-viec-lam/nganh-nghe/cntt-phan-mem" placeholder="http://www.careerlink.vn/viec-lam/cntt-phan-mem19"/>
+    <input size="100" name="cate_link" value="http://www.timviecnhanh.com/vieclam/tuyendung/17/cong-nghe-thong-tin.html" placeholder="http://www.timviecnhanh.com/vieclam/tuyendung/17/cong-nghe-thong-tin.html"/>
 </div>
 <div class="row">
     <label>Chi tiết link</label>
-    <input size="100" name="cate_pattern" value="/tim-viec-lam/nganh-nghe/cntt-phan-mem/limit/20/page/" placeholder="/viec-lam/cntt-phan-mem/19?page=" />
+    <input size="100" name="cate_pattern" value="/vieclam/tuyendung/17/cong-nghe-thong-tin.html?page=" placeholder="/vieclam/tuyendung/17/cong-nghe-thong-tin.html?page=" />
 </div>
 <div class="row">
     <label>Từ trang số</label>
@@ -48,7 +43,7 @@
 
 <div class="row">
     <label>Số bản ghi (chọn 0 cho tất cả)</label>
-    <input size="100" name="nums" value="2" placeholder = "0"/>
+    <input size="100" name="nums" value="5" placeholder = "0"/>
 </div>
 <div class="row submit">
     <?php echo CHtml::submitButton('Lưu dữ liệu'); ?>

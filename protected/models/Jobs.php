@@ -31,9 +31,14 @@
  * @property integer $views_count
  * @property string $career_link_id
  * @property string $job_code
+ * @property string $created
+ * @property string $updated
  */
 class Jobs extends CActiveRecord
-{
+{	
+
+	public $cname;
+	public $cid;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -54,10 +59,10 @@ class Jobs extends CActiveRecord
 			array('title, contact_way', 'length', 'max'=>255),
 			array('contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, applicant_gender, applicant_age, job_type, job_code', 'length', 'max'=>200),
 			array('created_on, end_date, career_link_id', 'length', 'max'=>50),
-			array('description, job_require, contact_des, contact_person, contact_add', 'safe'),
+			array('description, job_require, contact_des, contact_person, contact_add, created, updated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type_id, category_id, company_id, title, description, job_require, contact_way, contact_des, contact_person, contact_add, contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, created_on, end_date, is_temp, applicant_gender, applicant_age, job_type, is_active, views_count, career_link_id, job_code', 'safe', 'on'=>'search'),
+			array('id, type_id, category_id, company_id, title, description, job_require, contact_way, contact_des, contact_person, contact_add, contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, created_on, end_date, is_temp, applicant_gender, applicant_age, job_type, is_active, views_count, career_link_id, job_code, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -105,6 +110,8 @@ class Jobs extends CActiveRecord
 			'views_count' => 'Views Count',
 			'career_link_id' => 'Career Link',
 			'job_code' => 'Job Code',
+			'created' => 'Created',
+			'updated' => 'Updated',
 		);
 	}
 
@@ -153,6 +160,8 @@ class Jobs extends CActiveRecord
 		$criteria->compare('views_count',$this->views_count);
 		$criteria->compare('career_link_id',$this->career_link_id,true);
 		$criteria->compare('job_code',$this->job_code,true);
+		$criteria->compare('created',$this->created,true);
+		$criteria->compare('updated',$this->updated,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
