@@ -5,8 +5,6 @@
  *
  * The followings are the available columns in table 'jobs':
  * @property string $id
- * @property integer $type_id
- * @property integer $category_id
  * @property integer $company_id
  * @property string $title
  * @property string $description
@@ -35,10 +33,7 @@
  * @property string $updated
  */
 class Jobs extends CActiveRecord
-{	
-
-	public $cname;
-	public $cid;
+{
 	/**
 	 * @return string the associated database table name
 	 */
@@ -55,14 +50,14 @@ class Jobs extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('type_id, category_id, company_id, is_temp, is_active, views_count', 'numerical', 'integerOnly'=>true),
+			array('company_id, is_temp, is_active, views_count', 'numerical', 'integerOnly'=>true),
 			array('title, contact_way', 'length', 'max'=>255),
 			array('contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, applicant_gender, applicant_age, job_type, job_code', 'length', 'max'=>200),
 			array('created_on, end_date, career_link_id', 'length', 'max'=>50),
 			array('description, job_require, contact_des, contact_person, contact_add, created, updated', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, type_id, category_id, company_id, title, description, job_require, contact_way, contact_des, contact_person, contact_add, contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, created_on, end_date, is_temp, applicant_gender, applicant_age, job_type, is_active, views_count, career_link_id, job_code, created, updated', 'safe', 'on'=>'search'),
+			array('id, company_id, title, description, job_require, contact_way, contact_des, contact_person, contact_add, contact_name, job_salary, cv_lang, job_level, applicant_level, applicant_experience, created_on, end_date, is_temp, applicant_gender, applicant_age, job_type, is_active, views_count, career_link_id, job_code, created, updated', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -84,8 +79,6 @@ class Jobs extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'type_id' => 'Type',
-			'category_id' => 'Category',
 			'company_id' => 'Company',
 			'title' => 'Title',
 			'description' => 'Description',
@@ -134,8 +127,6 @@ class Jobs extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('type_id',$this->type_id);
-		$criteria->compare('category_id',$this->category_id);
 		$criteria->compare('company_id',$this->company_id);
 		$criteria->compare('title',$this->title,true);
 		$criteria->compare('description',$this->description,true);

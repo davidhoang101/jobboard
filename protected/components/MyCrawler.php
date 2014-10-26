@@ -1,50 +1,36 @@
 <?php
 class MyCrawler {
 
-	public $baseUrl = 'http://www.careerlink.vn';
-	public $categoryLinkPattern = '/viec-lam/cntt-phan-mem/19?page=';
-	public $cateUrl = 'http://www.careerlink.vn/viec-lam/cntt-phan-mem/19';
-
-	public function init($baseUrl, $cateUrl, $categoryLinkPattern){
-		$this->categoryLinkPattern = $categoryLinkPattern;
-		$this->cateUrl = $cateUrl;
-		$this->baseUrl = $baseUrl;		
-	}
+	private $_baseUrl = 'http://www.careerlink.vn';
+	private $_link = 'http://www.careerlink.vn/vieclam/list/?page=';
 	
 	
-	/*
-	*get all page of category
-	*input: offsetLimit : from page to page
-	*output: all link of page of category
-	*http://www.careerlink.vn/viec-lam/cntt-phan-mem/19?page=2
-	*/
-	function getAllPages($offsetLimit){
-		$html = new simple_html_dom();    
-		$html->load_file($this->cateUrl);
+	function getJobs(){	
+		$results = array();			
+		$break = FALSE;
+		$html = new simple_html_dom();	
+		for ($i=1; $i < 1000; $i++) {		
+			$html->load_file($this->_link . $i);			
+			foreach ($html->find('tr[class=normal]') as $post) {			        												
+				if(strtotime($post->children(4)->children(0)->plaintext) < strtotime('25-10-2014')) { //strtotime(date('d-m-Y'))
+					$break = TRUE;
+					break;
+				}
+				$results[] = $this->_baseUrl . $post->children(1)->children(0)->attr['href'];	
+			}
+			if ($break){
+				break;
+			}	
 
-		$maxPage = 0;
-		$pages = array();    	
+		}	
 
-    	//loop and get all page's link
-		for ($i = $offsetLimit[0]; $i <= $offsetLimit[1]; $i++) { 
-			$pages[] = $this->baseUrl . $this->categoryLinkPattern . $i;
-		}		
-
-		return $pages;
+		$rsData = NULL;
+		foreach ($results as $key => $value) {        
+			$rsData[] = $this->getDetailPost($value); 			
+		}  					
+		return $rsData;
 	}
 
-
-	//get all link of page
-	//pageLink: http://www.careerlink.vn/viec-lam/cntt-phan-mem/19?page=2
-	function getAllLinkOfOnePage($pageLink, &$results){		
-		$html = new simple_html_dom();
-		$html->load_file($pageLink);
-		$items = $html->find('tr[class=normal]');
-		foreach ($items as $post) {             
-			$results[] = $this->baseUrl . $post->children(1)->children(0)->attr['href'];
-		}
-		return $results;
-	}
 
 	//get detail of post
 	function getDetailPost($postUrl){
@@ -183,7 +169,7 @@ class MyCrawler {
 		unset($comInfos);
 		
 		$results['logo_url'] = $html->find('.ttchung',0)->children(0) ? 
-						$this->baseUrl . $html->find('.ttchung',0)->children(0)->src : '';
+						$this->_baseUrl . $html->find('.ttchung',0)->children(0)->src : '';
 
 		
 		return $results;   

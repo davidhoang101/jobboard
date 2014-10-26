@@ -171,17 +171,16 @@ class JobsController extends Controller
 		}
 	}
 
-	public function actionCareerlink(){	
+	public function actionCareerlink(){				
+		//////////	
 		$cates = Categories::model()->findAll(array('select'=>'id,name'));		
 		$records = '';
 		$jobs = array();
 
 		//fetch data, if click on save data button
-		if(!empty($_POST['yt0'])) {	
-			$catId = $_POST['cate_id'];		
-
-			$jobs = $this->fetchData($_POST['cate_link'], $_POST['cate_pattern'],
-				array($_POST['cate_from_page'], $_POST['cate_to_page']), $_POST['nums']);			
+		if(!empty($_POST['yt0'])) {		
+			$crawler = new MyCrawler();		
+			$jobs = $crawler->getJobs();					
 			$records = count($jobs);	
 			
 			foreach($jobs as $item)
@@ -215,8 +214,7 @@ class JobsController extends Controller
 					//insert job			
 					if (empty($modelJob->id)) {
 						$model = new Jobs;
-					  //print_r($item);die;
-						$model->category_id = $catId ? $catId : 0;
+
 						$model->company_id = isset($comId ) ? $comId : 0;
 						$model->title = isset($item['jobTitle']) ? $item['jobTitle'] : 0;
 						$model->description = isset($item['jobDes']) ? $item['jobDes'] : 0;
@@ -276,14 +274,14 @@ class JobsController extends Controller
 					
 						} else {
 							echo "job";
-							print_r($model->getErrors());
+							print_r($model->getErrors());die;
 						}
 					}					
 					
 
 				} else {
 					echo "company";
-					print_r($com->getErrors());
+					print_r($com->getErrors());die;
 				}
 			}
 			unset($jobs);		
@@ -291,31 +289,7 @@ class JobsController extends Controller
 
 		$this->render('careerlink',array('records_found' => $records,'cates' => $cates));
 	}
-	public function fetchData($cateLink,$catePattern,$offsetLimit = array(1,1), $limit = 1){				
-        //get all pages of category
-		$crawler = new MyCrawler($cateLink,$catePattern);
-		$allPages = $crawler->getAllPages($offsetLimit);		
 
-        //get  all link of this category
-		$allLinks = array();  
-		foreach ($allPages as $key => $value) {
-			$crawler->getAllLinkOfOnePage($value, $allLinks);
-		}
-
-		$rsData = array();
-		$iter = 1;
-		foreach ($allLinks as $key => $value) {        
-			if($iter > $limit && $limit != 0){
-				break;
-			} else {
-				$rsData[] = $crawler->getDetailPost($value);                              				                          
-			}
-
-			$iter++;
-		}  
-		//print_r($rsData);die;			
-		return $rsData ;                     
-	}
 
 	public function actionTuoiTre(){	
 		$cates = Categories::model()->findAll(array('select'=>'id,name'));		
