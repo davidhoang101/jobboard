@@ -34,6 +34,8 @@
  */
 class Jobs extends CActiveRecord
 {
+	public $cname;
+	public $cid;
 	/**
 	 * @return string the associated database table name
 	 */
