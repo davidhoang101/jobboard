@@ -3,9 +3,9 @@
                 <ul>
                     <?php
                     if ($model) {
-                         foreach ($model as $key => $value) {                                                  
+                         foreach ($model as $key => $value) {                                                                              
                      ?>
-                     <li><?php echo CHtml::link($value['name'],array('categories/detail','id' => $value['category_id'])); ?>  <span>(<?php echo $value['count']; ?>)</span></li>                              
+                     <li><?php echo CHtml::link($value['name'],array('categories/detail','id' => !empty($value['category_id']) ? $value['category_id'] : '')); ?>  <span>(<?php echo $value['count']; ?>)</span></li>                              
                     <?php } } ?>
                 </ul>
             </div>

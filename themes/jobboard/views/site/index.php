@@ -11,9 +11,9 @@
             <li class="ui-state-default ui-corner-top">
                 <a href="#search-2">Tìm kiếm việc làm nhanh theo địa điểm</a>
             </li>
-            <li>
+            <!-- <li>
                 <input id="advancedSearch" onclick="window.location.href='/tim-viec-lam-nang-cao';" value="Tìm kiếm việc làm nâng cao" type="button">
-            </li>
+            </li> -->
         </ul>
 
 
@@ -35,79 +35,7 @@
             </div>
         </div>
          <?php  $this->widget('JobCates');  ?>
-        <div id="search-2" class="ui-tabs-hide ui-tabs-panel ui-widget-content ui-corner-bottom">
-            <div class="holder list-job-cate city">
-                <ul>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ho-chi-minh/HCM" title="ViewAllJobsAtLocation: Hồ Chí Minh">Hồ Chí Minh</a> <span>(5153)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ha-noi/HN" title="ViewAllJobsAtLocation: Hà Nội">Hà Nội</a> <span>(5076)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/da-nang/DN" title="ViewAllJobsAtLocation: Đà Nẵng">Đà Nẵng</a> <span>(405)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/an-giang/AG" title="ViewAllJobsAtLocation: An Giang">An Giang</a> <span>(43)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ba-ria-vung-tau/BRVT" title="ViewAllJobsAtLocation: Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</a> <span>(119)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/bac-can/BK" title="ViewAllJobsAtLocation: Bắc Cạn">Bắc Cạn</a> <span>(2)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/bac-giang/BG" title="ViewAllJobsAtLocation: Bắc Giang">Bắc Giang</a> <span>(87)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/bac-lieu/BL" title="ViewAllJobsAtLocation: Bạc Liêu">Bạc Liêu</a> <span>(20)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/bac-ninh/BN" title="ViewAllJobsAtLocation: Bắc Ninh">Bắc Ninh</a> <span>(256)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ben-tre/BTE" title="ViewAllJobsAtLocation: Bến Tre">Bến Tre</a> <span>(61)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/binh-dinh/BDH" title="ViewAllJobsAtLocation: Bình Định">Bình Định</a> <span>(36)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/binh-duong/BD" title="ViewAllJobsAtLocation: Bình Dương">Bình Dương</a> <span>(673)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/binh-phuoc/BP" title="ViewAllJobsAtLocation: Bình Phước">Bình Phước</a> <span>(45)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/binh-thuan/BT" title="ViewAllJobsAtLocation: Bình Thuận">Bình Thuận</a> <span>(64)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ca-mau/CM" title="ViewAllJobsAtLocation: Cà Mau">Cà Mau</a> <span>(26)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/can-tho/CT" title="ViewAllJobsAtLocation: Cần Thơ">Cần Thơ</a> <span>(65)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/cao-bang/CB" title="ViewAllJobsAtLocation: Cao Bằng">Cao Bằng</a> <span>(6)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/dak-lak/DL" title="ViewAllJobsAtLocation: Đắk Lắk">Đắk Lắk</a> <span>(54)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/dak-nong/DNG" title="ViewAllJobsAtLocation: Đăk Nông">Đăk Nông</a> <span>(11)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/dien-bien/DB" title="ViewAllJobsAtLocation: Điện Biên">Điện Biên</a> <span>(7)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/dong-nai/DNI" title="ViewAllJobsAtLocation: Đồng Nai">Đồng Nai</a> <span>(405)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/dong-thap/DT" title="ViewAllJobsAtLocation: Đồng Tháp">Đồng Tháp</a> <span>(14)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/gia-lai/GL" title="ViewAllJobsAtLocation: Gia Lai">Gia Lai</a> <span>(36)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ha-giang/HG" title="ViewAllJobsAtLocation: Hà Giang">Hà Giang</a> <span>(5)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ha-nam/HNM" title="ViewAllJobsAtLocation: Hà Nam">Hà Nam</a> <span>(54)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ha-tay/HT" title="ViewAllJobsAtLocation: Hà Tây">Hà Tây</a> <span>(7)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ha-tinh/HTH" title="ViewAllJobsAtLocation: Hà Tĩnh">Hà Tĩnh</a> <span>(25)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/hai-duong/HD" title="ViewAllJobsAtLocation: Hải Dương">Hải Dương</a> <span>(117)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/hai-phong/HP" title="ViewAllJobsAtLocation: Hải Phòng">Hải Phòng</a> <span>(271)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/hau-giang/HAG" title="ViewAllJobsAtLocation: Hậu Giang">Hậu Giang</a> <span>(31)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/hoa-binh/HB" title="ViewAllJobsAtLocation: Hòa Bình">Hòa Bình</a> <span>(28)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/hung-yen/HY" title="ViewAllJobsAtLocation: Hưng Yên">Hưng Yên</a> <span>(171)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/kien-giang/KG" title="ViewAllJobsAtLocation: Kiên Giang">Kiên Giang</a> <span>(34)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/khanh-hoa/KH" title="ViewAllJobsAtLocation: Khánh Hòa">Khánh Hòa</a> <span>(116)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/kon-tum/KT" title="ViewAllJobsAtLocation: Kon Tum">Kon Tum</a> <span>(22)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/lai-chau/LC" title="ViewAllJobsAtLocation: Lai Châu">Lai Châu</a> <span>(15)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/lam-dong/LD" title="ViewAllJobsAtLocation: Lâm Đồng">Lâm Đồng</a> <span>(46)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/lang-son/LS" title="ViewAllJobsAtLocation: Lạng Sơn">Lạng Sơn</a> <span>(5)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/lao-cai/LCI" title="ViewAllJobsAtLocation: Lào Cai">Lào Cai</a> <span>(30)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/long-an/LA" title="ViewAllJobsAtLocation: Long An">Long An</a> <span>(167)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/nam-dinh/ND" title="ViewAllJobsAtLocation: Nam Định">Nam Định</a> <span>(58)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/nghe-an/NA" title="ViewAllJobsAtLocation: Nghệ An">Nghệ An</a> <span>(51)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ninh-binh/NB" title="ViewAllJobsAtLocation: Ninh Bình">Ninh Bình</a> <span>(65)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/ninh-thuan/NT" title="ViewAllJobsAtLocation: Ninh Thuận">Ninh Thuận</a> <span>(18)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/phu-tho/PT" title="ViewAllJobsAtLocation: Phú Thọ">Phú Thọ</a> <span>(42)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/phu-yen/PY" title="ViewAllJobsAtLocation: Phú Yên">Phú Yên</a> <span>(11)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/quang-binh/QB" title="ViewAllJobsAtLocation: Quảng Bình">Quảng Bình</a> <span>(27)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/quang-nam/QN" title="ViewAllJobsAtLocation: Quảng Nam">Quảng Nam</a> <span>(58)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/quang-ngai/QNI" title="ViewAllJobsAtLocation: Quảng Ngãi">Quảng Ngãi</a> <span>(28)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/quang-ninh/QNH" title="ViewAllJobsAtLocation: Quảng Ninh">Quảng Ninh</a> <span>(93)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/quang-tri/QT" title="ViewAllJobsAtLocation: Quảng Trị">Quảng Trị</a> <span>(12)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/soc-trang/ST" title="ViewAllJobsAtLocation: Sóc Trăng">Sóc Trăng</a> <span>(17)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/son-la/SL" title="ViewAllJobsAtLocation: Sơn La">Sơn La</a> <span>(23)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/tay-ninh/TN" title="ViewAllJobsAtLocation: Tây Ninh">Tây Ninh</a> <span>(73)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/thai-binh/TB" title="ViewAllJobsAtLocation: Thái Bình">Thái Bình</a> <span>(56)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/thai-nguyen/TNN" title="ViewAllJobsAtLocation: Thái Nguyên">Thái Nguyên</a> <span>(66)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/thanh-hoa/THH" title="ViewAllJobsAtLocation: Thanh Hóa">Thanh Hóa</a> <span>(83)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/thua-thien-hue/TTH" title="ViewAllJobsAtLocation: Thừa Thiên - Huế">Thừa Thiên - Huế</a> <span>(48)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/tien-giang/TG" title="ViewAllJobsAtLocation: Tiền Giang">Tiền Giang</a> <span>(42)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/tra-vinh/TV" title="ViewAllJobsAtLocation: Trà Vinh">Trà Vinh</a> <span>(19)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/tuyen-quang/TQ" title="ViewAllJobsAtLocation: Tuyên Quang">Tuyên Quang</a> <span>(9)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/vinh-long/VL" title="ViewAllJobsAtLocation: Vĩnh Long">Vĩnh Long</a> <span>(21)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/vinh-phuc/VP" title="ViewAllJobsAtLocation: Vĩnh Phúc">Vĩnh Phúc</a> <span>(96)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/yen-bai/YB" title="ViewAllJobsAtLocation: Yên Bái">Yên Bái</a> <span>(14)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/khac/OT" title="ViewAllJobsAtLocation: Khác">Khác</a> <span>(59)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/nuoc-ngoai/NN" title="ViewAllJobsAtLocation: Nước Ngoài">Nước Ngoài</a> <span>(9)</span></li>
-                    <li><a href="http://www.careerlink.vn/tim-viec-lam-tai/nhat-ban/JP" title="ViewAllJobsAtLocation: Nhật Bản">Nhật Bản</a> <span>(12)</span></li>
-                </ul>
-            </div>
-        </div>
+         <?php  $this->widget('JobByPlace');  ?>        
     </div>
 </div>
 

@@ -7,12 +7,17 @@
 		}
 		
 		public function run() {						
-			$Criteria = new CDbCriteria();
-			$Criteria->select = 't.*, (select COUNT(id) from jobs j where j.category_id =t.id) jobcount';		
-			$this->render('jobbyplace',array(
-				'model'=>Categories::model()->findAll($Criteria)
-			));			
-			parent::run();
+			$dbCommand = Yii::app()->db->createCommand("
+				   SELECT place_id,c.name,COUNT(*) as count 
+				   FROM job_places j
+				   LEFT JOIN cities c ON j.place_id = c.id
+				   GROUP BY place_id
+				");
+
+			$model = $dbCommand->queryAll();
+			 $this->render('jobbyplace',array(
+			 	'model'=>$model
+			 ));			
 		}	
 			
 	}

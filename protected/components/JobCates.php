@@ -6,13 +6,7 @@
 			$baseurl = Yii::app()->request->baseUrl;
 		}
 		
-		public function run() {						
-			// $Criteria = new CDbCriteria();
-			// $Criteria->select = 't.*, (select COUNT(id) from jobs j where j.category_id =t.id) jobcount';		
-			// $this->render('jobcates',array(
-			// 	'model'=>Categories::model()->findAll($Criteria)
-			// ));				
-			
+		public function run() {									
 			$dbCommand = Yii::app()->db->createCommand("
 				   SELECT category_id,c.name,COUNT(*) as count 
 				   FROM job_category j
