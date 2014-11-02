@@ -18,7 +18,9 @@
     <meta property="og:image" content="http://www.careerlink.vn/images/logo-c.png">
     <meta property="og:site_name" content="CareerLink.vn">
     <meta property="fb:app_id" content="157848801689">
-    <meta property="fb:admins" content="157848801689"><link href="<?php echo Yii::app()->theme->baseUrl?>/assets/index_files/app.css" media="screen" rel="stylesheet" type="text/css">
+    <meta property="fb:admins" content="157848801689">
+    <link href="<?php echo Yii::app()->theme->baseUrl?>/assets/index_files/app.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="<?php echo Yii::app()->theme->baseUrl?>/assets/index_files/app.min.css" media="screen" rel="stylesheet" type="text/css">
     <!--[if IE 6]>
     <link rel="stylesheet" href="/stylesheets/ie6.css?v19" type="text/css" />
     <![endif]-->

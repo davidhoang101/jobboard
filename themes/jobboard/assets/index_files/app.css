@@ -1961,7 +1961,6 @@ div.dialog-titlebar a span {
 }
 #doitac img {
     display: block;
-    opacity: 0;
 }
 #doitac img:hover, #doitac img.hover {
     opacity: 1;
@@ -7339,4 +7338,13 @@ dt.banner-vieclamthoivu {
 }
 .employer-savedresume .check-all {
     width: 40px;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.details .toolbar ul.pagination li.selected a{
+    color: #358fdd;
+    background: #dff4ff;
 }
