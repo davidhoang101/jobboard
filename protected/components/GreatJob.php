@@ -8,7 +8,7 @@
 		
 		public function run() {						
 			$Criteria = new CDbCriteria();
-			$Criteria->select = 't.title, t.id, c.name cname, c.id cid ';
+			$Criteria->select = 't.title, t.id, c.name com_name, c.id com_id ';
 			$Criteria->join = 'LEFT JOIN companies c ON c.id = t.company_id';
 			$Criteria->order = "updated DESC limit 16";					
 			$this->render('greatjob',array(

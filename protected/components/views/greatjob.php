@@ -8,7 +8,7 @@
              ?>
             <li>
                 <?php echo CHtml::link($value->title,array('jobs/detail','id' => $value->id)); ?>                
-                <?php echo CHtml::link($value->cname,array('companies/detail','id' => $value->cid),array('class' => 'top-hotjob-company-link')); ?>                                
+                <?php echo CHtml::link($value->com_name,array('companies/detail','id' => $value->com_id),array('class' => 'top-hotjob-company-link')); ?>                                
             </li>
 
             <?php } } ?>            

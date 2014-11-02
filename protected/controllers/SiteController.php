@@ -100,4 +100,33 @@ class SiteController extends Controller {
         $this->redirect(Yii::app()->homeUrl);
     }
 
+    public function actionCategory(){
+         Yii::app()->theme="jobboard";
+        $this->layout='//layouts/home';
+        
+        $criteria = new CDbCriteria;
+        $criteria->select = 't.id AS id, t.title AS title,com.id AS com_id,com.name AS com_name, ct.id AS city_id, ct.name AS city_name,t.created AS created';
+        $criteria->join = ' LEFT JOIN `companies` AS `com` ON com.id = t.company_id';
+        $criteria->join .= ' LEFT JOIN `job_category` AS `jc` ON t.id = jc.job_id';
+        $criteria->join .= ' LEFT JOIN `job_places` AS `jp` ON t.id = jp.job_id';
+        $criteria->join .= ' LEFT JOIN `cities` AS `ct` ON ct.id = jp.place_id';
+        $criteria->condition = 'jc.category_id = :category_id';
+        $criteria->group = 'id';
+        $criteria->params = array(":category_id" => $_GET['ctid']);
+
+        $itemCount = Jobs::model()->count($criteria);
+                
+        $pages = new CPagination($itemCount);
+        $pages->setPageSize(Yii::app()->params['listPerPage']);
+        $pages->applyLimit($criteria); 
+
+        $this->render('category',array(
+            'model'=>Jobs::model()->findAll($criteria),
+            'itemCount'=>$itemCount,
+            'page_size'=>Yii::app()->params['listPerPage'],
+            'items_count'=>$itemCount,
+            'pages'=>$pages,
+        ));
+    }
+
 }

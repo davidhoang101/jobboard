@@ -170,4 +170,6 @@ class CategoriesController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	
 }
