@@ -180,7 +180,7 @@ class JobsController extends Controller
 		//fetch data, if click on save data button
 		if(!empty($_POST['yt0'])) {		
 			$crawler = new MyCrawler();		
-			$jobs = $crawler->getJobs();					
+			$jobs = $crawler->getJobs($_POST['nums']);					
 			$records = count($jobs);	
 			
 			foreach($jobs as $item)

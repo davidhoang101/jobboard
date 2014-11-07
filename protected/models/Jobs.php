@@ -41,6 +41,8 @@ class Jobs extends CActiveRecord
 	public $com_web_url;
 	public $com_logo_url;
 	public $com_address;
+	public $place_id;
+	public $place_name;
 	/**
 	 * @return string the associated database table name
 	 */

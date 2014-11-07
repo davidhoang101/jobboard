@@ -200,12 +200,7 @@ foreach ($model as $key => $value) {
                                 <?php 
                                 } }
                                 ?>
-                                <li>
-                                  <a href="/viec-lam/thu-ky-hanh-chanh/6">Thư ký/ Hành chánh</a>
-                                </li>
-                                <li>
-                                  <a href="/viec-lam/nhan-su/16">Nhân sự</a>
-                                </li>
+                                
                               </ul>
                             </li>
                             <li>
@@ -228,9 +223,7 @@ foreach ($model as $key => $value) {
                                   <?php 
                                   } }
                                   ?>                                
-                                  <li>
-                                    <a href="/tim-viec-lam-tai/ho-chi-minh/HCM" title="View Jobs at Location: Hồ Chí Minh">Hồ Chí Minh</a>
-                                  </li>
+                                  
                                 </ul>
                               </li>
                               <li>

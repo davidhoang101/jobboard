@@ -5,11 +5,11 @@ class MyCrawler {
 	private $_link = 'http://www.careerlink.vn/vieclam/list/?page=';
 	
 	
-	function getJobs(){	
+	function getJobs($pageNum){	
 		$results = array();			
 		$rsData = NULL;		
 		$html = new simple_html_dom();			
-		for ($i=1; $i < 2; $i++) {		
+		for ($i=1; $i < (int)$pageNum; $i++) {		
 			$html->load_file($this->_link . $i);			
 			foreach ($html->find('tr[class=normal]') as $post) {			        												
 				// if(strtotime($post->children(4)->children(0)->plaintext) < strtotime('25-10-2014')) { //strtotime(date('d-m-Y'))

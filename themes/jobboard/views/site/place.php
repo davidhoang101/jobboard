@@ -124,7 +124,8 @@
                                 <?php echo CHtml::link($value->com_name,array('job/byCompany','com_id' => $value->com_id)); ?>                                
                               </td>
                               <td style="width:120px">
-                                <a href="/tim-viec-lam-tai/dong-nai/DNI" title="View Jobs at Location: Đồng Nai">Đồng Nai</a>                  </td>
+                                  <?php echo CHtml::link($value->place_name,array('place','pid' => $value->place_id)); ?>                              
+                                </td>
                                 <td style="width:120px"><span class="date">01-11-2014</span></td>
                               </tr>
                               <?php

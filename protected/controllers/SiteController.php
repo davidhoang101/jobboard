@@ -105,7 +105,7 @@ class SiteController extends Controller {
         $this->layout='//layouts/home';
         
         $criteria = new CDbCriteria;
-        $criteria->select = 't.id AS id, t.title AS title,com.id AS com_id,com.name AS com_name, ct.id AS city_id, ct.name AS city_name,t.created AS created';
+        $criteria->select = 't.id AS id, t.title AS title,com.id AS com_id,com.name AS com_name,ct.id as place_id, ct.name as place_name, ct.id AS city_id, ct.name AS city_name,t.created AS created';
         $criteria->join = ' LEFT JOIN `companies` AS `com` ON com.id = t.company_id';
         $criteria->join .= ' LEFT JOIN `job_category` AS `jc` ON t.id = jc.job_id';
         $criteria->join .= ' LEFT JOIN `job_places` AS `jp` ON t.id = jp.job_id';
@@ -134,7 +134,7 @@ class SiteController extends Controller {
         $this->layout='//layouts/home';
         
         $criteria = new CDbCriteria;
-        $criteria->select = 't.id AS id, t.title AS title,com.id AS com_id,com.name AS com_name, ct.id AS city_id, ct.name AS city_name,t.created AS created';
+        $criteria->select = 't.id AS id, t.title AS title,com.id AS com_id,com.name AS com_name,ct.id as place_id, ct.name as place_name, ct.id AS city_id, ct.name AS city_name,t.created AS created';
         $criteria->join = ' LEFT JOIN `companies` AS `com` ON com.id = t.company_id';
         $criteria->join .= ' LEFT JOIN `job_category` AS `jc` ON t.id = jc.job_id';
         $criteria->join .= ' LEFT JOIN `job_places` AS `jp` ON t.id = jp.job_id';
