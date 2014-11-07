@@ -140,7 +140,7 @@
           -TODO: logo.png, transparent
         -->
         <div id="logo">
-            <a href="http://www.careerlink.vn/" title="Viec lam, tim viec, tuyen dung, tim viec lam"><img alt="tim kiem viec lam tren mang tuyen dung truc tuyen" src="<?php echo Yii::app()->theme->baseUrl?>/assets/index_files/logo.jpg" height="58" width="120"></a>
+            <a href="<?php echo Yii::app()->getBaseUrl(true); ?>" title="Viec lam, tim viec, tuyen dung, tim viec lam"><img alt="tim kiem viec lam tren mang tuyen dung truc tuyen" src="<?php echo Yii::app()->theme->baseUrl?>/assets/index_files/logo.jpg" height="58" width="120"></a>
         </div>
 
         <div class="login">
