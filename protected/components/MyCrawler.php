@@ -7,27 +7,23 @@ class MyCrawler {
 	
 	function getJobs(){	
 		$results = array();			
-		$break = FALSE;
-		$html = new simple_html_dom();	
-		for ($i=1; $i < 1000; $i++) {		
+		$rsData = NULL;		
+		$html = new simple_html_dom();			
+		for ($i=1; $i < 2; $i++) {		
 			$html->load_file($this->_link . $i);			
 			foreach ($html->find('tr[class=normal]') as $post) {			        												
-				if(strtotime($post->children(4)->children(0)->plaintext) < strtotime('25-10-2014')) { //strtotime(date('d-m-Y'))
-					$break = TRUE;
-					break;
-				}
-				$results[] = $this->_baseUrl . $post->children(1)->children(0)->attr['href'];	
+				// if(strtotime($post->children(4)->children(0)->plaintext) < strtotime('25-10-2014')) { //strtotime(date('d-m-Y'))
+				// 	$break = TRUE;
+				// 	break;
+				// }				
+				$rsData[] = $this->getDetailPost(
+					$this->_baseUrl . $post->children(1)->children(0)->attr['href']); 
 			}
-			if ($break){
-				break;
-			}	
+			// if ($break){
+			// 	break;
+			// }	
 
-		}	
-
-		$rsData = NULL;
-		foreach ($results as $key => $value) {        
-			$rsData[] = $this->getDetailPost($value); 			
-		}  					
+		}		
 		return $rsData;
 	}
 
