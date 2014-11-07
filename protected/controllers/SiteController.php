@@ -129,4 +129,56 @@ class SiteController extends Controller {
         ));
     }
 
+     public function actionPlace(){
+         Yii::app()->theme="jobboard";
+        $this->layout='//layouts/home';
+        
+        $criteria = new CDbCriteria;
+        $criteria->select = 't.id AS id, t.title AS title,com.id AS com_id,com.name AS com_name, ct.id AS city_id, ct.name AS city_name,t.created AS created';
+        $criteria->join = ' LEFT JOIN `companies` AS `com` ON com.id = t.company_id';
+        $criteria->join .= ' LEFT JOIN `job_category` AS `jc` ON t.id = jc.job_id';
+        $criteria->join .= ' LEFT JOIN `job_places` AS `jp` ON t.id = jp.job_id';
+        $criteria->join .= ' LEFT JOIN `cities` AS `ct` ON ct.id = jp.place_id';
+        $criteria->condition = 'jp.place_id = :place_id';
+        $criteria->group = 'id';
+        $criteria->params = array(":place_id" => $_GET['pid']);
+
+        $itemCount = Jobs::model()->count($criteria);
+                
+        $pages = new CPagination($itemCount);
+        $pages->setPageSize(Yii::app()->params['listPerPage']);
+        $pages->applyLimit($criteria); 
+
+        $this->render('place',array(
+            'model'=>Jobs::model()->findAll($criteria),
+            'itemCount'=>$itemCount,
+            'page_size'=>Yii::app()->params['listPerPage'],
+            'items_count'=>$itemCount,
+            'pages'=>$pages,
+        ));
+    }
+
+
+    public function actionJob(){
+        Yii::app()->theme="jobboard";
+        $this->layout='//layouts/home';
+        
+        $criteria = new CDbCriteria;
+        $criteria->select = 't.*,com.description AS com_desc,
+                            com.id AS com_id, com.name AS com_name,
+                            com.members AS com_members,
+                            com.web_url AS com_web_url,
+                            com.logo_url AS com_logo_url,
+                            com.address AS com_address';
+        $criteria->join = ' LEFT JOIN `companies` AS `com` ON com.id = t.company_id';
+        // $criteria->join .= ' LEFT JOIN `job_category` AS `jc` ON t.id = jc.job_id';
+        // $criteria->join .= ' LEFT JOIN `job_places` AS `jp` ON t.id = jp.job_id';
+        // $criteria->join .= ' LEFT JOIN `cities` AS `ct` ON ct.id = jp.place_id';
+        $criteria->condition = 't.id = :job_id';
+        $criteria->params = array(":job_id" => $_GET['jid']);                
+        $this->render('job',array(
+            'model'=>  $model = Jobs::model()->findAll($criteria)       
+        ));
+    }
+
 }

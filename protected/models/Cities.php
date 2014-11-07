@@ -94,4 +94,21 @@ class Cities extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public static function loadByIds($jid){
+		$criteria = new CDbCriteria();
+		$criteria->condition = 'job_id=:job_id';
+		$criteria->params = array(':job_id'=>$jid);
+		$cateIds = JobPlaces::model()->findAll($criteria);
+		$cIds = array();
+		foreach($cateIds as $key => $value)
+		{
+		    $cIds[] = $value->place_id;
+		}		
+		unset($criteria);
+
+		$criteria = new CDbCriteria();
+		$criteria->addInCondition('id',$cIds);		
+		return Cities::model()->findAll($criteria);				
+	}
 }
